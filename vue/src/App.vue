@@ -1,30 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <HomeHeader></HomeHeader>
+    <router-view/>
+  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import HomeHeader from './components/HomeHeader.vue';
+export default {
+    components: { HomeHeader }
 }
+</script>
 
-nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+<style lang="scss">
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body{
+  background: url(https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg) center center fixed;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -ms-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  margin: 0;
+  
 }
 </style>
