@@ -1,11 +1,11 @@
 <template>
     <div class="book-card">
-        <img :src=cover alt="Book cover">
+        <img :src=path alt="Book cover">
         <div id="info">
             <b>Title: {{title}}</b>
             <b>Author: {{author}}</b>
             <b>House: {{house}}</b>
-            <b>Year: {{year}}</b>
+            <b>Date: {{date}}</b>
             <b>Available: {{available}}</b>
             <b>Loaned: {{loaned}}</b>
             <button class="edit-button" :name="nameId" @click="editBook()">Edit</button>
@@ -20,14 +20,15 @@ export default {
         title: String,
         author: String,
         house: String,
-        year: Number,
+        date: String,
         available: Number,
         loaned: Number,
-        cover: String,
+        imagePath: String,
         nameId: Number
     },
     data(){
         return{
+            path: "http://localhost:3000/" + this.imagePath
         }
     },
     methods:{
@@ -51,7 +52,7 @@ export default {
                 orderBtn.style.background = "darkred";
             });
         });*/
-    }
+    },
 }
 </script>
 

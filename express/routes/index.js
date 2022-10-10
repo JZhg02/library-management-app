@@ -1,76 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const fs = require('fs');
 
-var books = [{
-  id: 1,
-  title: "Grokking Deep Learning",
-  author: "Andrew W. Task",
-  publishingHouse: "Manning Publications",
-  publishingDate: "01/25/2019",
-  image: "public/images/Grokking_Deep_Learning.jpg",
-},
-
-{
-  id: 2,
-  title: "Harry Potter: The Prequel",
-  author: "J.K. Rowling",
-  publishingHouse: "Hogwarts House Editions",
-  publishingDate: "06/11/2008",
-  image: "public/images/Harry_Potter_The_Prequel.jpg",
-},
-
-{
-  id: 3,
-  title: "Harry Potter and the Chamber of Secrets",
-  author: "J.K. Rowling",
-  publishingHouse: "Bloomsbury",
-  publishingDate: "07/02/1998",
-  image: "public/images/Harry_Potter_and_the_Chamber_of_Secrets.jpg",
-},
-
-{
-  id: 4,
-  title: "Harry Potter and the Philosopher's Stone",
-  author: "J.K. Rowling",
-  publishingHouse: "Bloomsbury",
-  publishingDate: "06/26/1997",
-  image: "public/images/Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.jpg",
-},
-
-{
-  id: 5,
-  title: "Harry Potter and the Prisoner of Azkaban",
-  author: "J.K. Rowling",
-  publishingHouse: "Bloomsbury",
-  publishingDate: "07/08/1999",
-  image: "public/images/Harry_Potter_and_the_Prisoner_of_Azkaban.jpg",
-},
-
-{
-  id: 6,
-  title: "Ulysses",
-  author: "James Joyce",
-  publishingHouse: "Shakespeare and Company",
-  publishingDate: "02/02/1922",
-  image: "public/images/Ulysses.jpg",
-},
-
-{
-  id: 7,
-  title: "Don Quixote",
-  author: "Miguel de Cervantes",
-  publishingHouse: "Francisco de Robles",
-  publishingDate: "01/01/1620",
-  image: "public/images/Don_Quixote.jpg",
-},
-{
-  title: "The Great Gatsby",
-  author: "F. Scott Fitzgerald",
-  publishingHouse: "Charles Scribner's Sons",
-  publishingDate: "05/10/1925",
-  image: "public/images/The_Great_Gatsby.jpg"
-}
-]
+var books = JSON.parse(fs.readFileSync('data/books.json', 'utf8'));
 
 var employees = [
   {
@@ -106,8 +38,9 @@ router.get('/', function (req, res, next) {
 
 // GET all the books
 router.get('/books', function (req, res, next) {
-  res.set('Cache-Control', 'max-age=7200') // stored in cache for 2hours
-  res.send(JSON.stringify(books))
+  res.header('Cache-Control', 'max-age=3600');     // Stored in cache for 1 hour
+  res.header('Content-Type', 'application/json');  // Specify file type
+  res.send(JSON.stringify(books));
 })
 
 // GET a book by id

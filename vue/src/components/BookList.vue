@@ -1,8 +1,8 @@
 <template>
     <div class="myList">
         <button id="book-button" @click="addBook()"><h1>+</h1></button>
-        <RegisteredBook v-for="book in bookList" :nameId=book.id :key=book.id :cover=book.cover :title=book.title :author=book.author :house=book.house 
-        :year=book.year :available=book.available :loaned=book.loaned></RegisteredBook>
+        <RegisteredBook v-for="book in bookList" :nameId=book.id :key=book.id :imagePath=book.image :title=book.title :author=book.author :house=book.publishingHouse 
+        :date=book.publishingDate :available=book.available :loaned=book.loaned></RegisteredBook>
         <div class="page-mask" :class="{ active: addIsMasked }">
             <AddBookPopup :isHidden=addIsHidden></AddBookPopup>
             <div class="add-cancel-buttons" :class="{ active: addIsMasked }">
@@ -11,15 +11,14 @@
             </div>
         </div>
         <div class="test" :name=bookList.id>
-            <EditBookPopup id="edit-popup" v-for="book in bookList" :name=book.id :key=book.id :cover=book.cover :title=book.title :author=book.author :house=book.house 
-            :year=book.year :available=book.available :loaned=book.loaned></EditBookPopup>
+            <EditBookPopup id="edit-popup" v-for="book in bookList" :name=book.id :key=book.id :image=book.image :title=book.title :author=book.author :publishingHouse=book.publishingHouse 
+            :publishingDate=book.publishingDate :available=book.available :loaned=book.loaned></EditBookPopup>
         </div>
     </div>
 </template>
 
 <script>
 import RegisteredBook from '@/components/RegisteredBook.vue';
-import json from '@/tempjsondata/mockdata.json'
 import AddBookPopup from '@/components/AddBookPopup.vue';
 import EditBookPopup from '@/components/EditBookPopup.vue';
 export default {
@@ -27,7 +26,7 @@ export default {
     components: { RegisteredBook, AddBookPopup, EditBookPopup },
     data(){
         return{
-            bookList: json, addIsHidden: true, addIsMasked: false
+            bookList: String, addIsHidden: true, addIsMasked: false
         }
     },
     methods:{
@@ -39,6 +38,16 @@ export default {
             this.addIsHidden = true
             this.addIsMasked = false
         }
+    },
+    beforeMount() {
+        fetch("http://localhost:3000/books", {
+            method: 'Get',
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            this.bookList = data
+        })
+
     }
 }
 </script>

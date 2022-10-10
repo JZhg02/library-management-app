@@ -87,7 +87,7 @@
         "publishingDate": "01/01/1958",
         "available": 3,
         "loaned": 2,
-        "image": "Things_Fall_Apart.jpg"
+        "image": "images/Things_Fall_Apart.jpg"
     },
     {
         "id": 10,
@@ -118,7 +118,6 @@
         "available": 10,
         "loaned": 0,
         "image": "images/The_Divine_Comedy.jpg"
-
     },
     {
         "id": 13,

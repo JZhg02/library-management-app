@@ -10,12 +10,12 @@
                 <input type="text" size="30" :value="author">
             </div>
             <div class="edit-input">
-                <label for="house">Publishing house: </label>
-                <input type="text" size="30" :value="house">
+                <label for="publishingHouse">Publishing house: </label>
+                <input type="text" size="30" :value="publishingHouse">
             </div>
             <div class="edit-input">
-                <label for="Year">Year of release: </label>
-                <input type="number" :value="year">
+                <label for="publishingDate">Publishing Date: </label>
+                <input type="text" :value="publishingDate">
             </div>
             <div class="edit-input">
                 <label for="available">Number of books available: </label>
@@ -26,8 +26,8 @@
                 <input type="number" :value="loaned">
             </div>
             <div class="edit-input">
-                <label for="cover">Book cover image URL: </label>
-                <input type="text" size="30" :value="cover">
+                <label for="image">Book cover image URL: </label>
+                <input type="text" size="30" :value="image">
             </div>
         </form>
         <div class="edit-cancel-buttons">
@@ -44,11 +44,11 @@ export default {
         isHidden: Boolean,
         title: String,
         author: String,
-        house: String,
-        year: Number,
+        publishingHouse: String,
+        publishingDate: String,
         available: Number,
         loaned: Number,
-        cover: String
+        image: String
     },
     methods:{
         cancelEdit(){
