@@ -33,7 +33,7 @@ export default {
     },
     methods:{
         editBook(){
-            var editPopupMask = document.querySelector(".test")
+            var editPopupMask = document.querySelector(".test-edit")
             editPopupMask.classList.add('edit-page-mask')
             var editPopup = document.querySelectorAll("#edit-popup")
             console.log(editPopup)

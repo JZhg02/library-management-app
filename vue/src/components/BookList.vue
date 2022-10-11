@@ -3,14 +3,18 @@
         <button id="book-button" @click="addBook()"><h1>+</h1></button>
         <RegisteredBook v-for="book in bookList" :nameId=book.id :key=book.id :imagePath=book.image :title=book.title :author=book.author :house=book.publishingHouse 
         :date=book.publishingDate :available=book.available :loaned=book.loaned></RegisteredBook>
-        <div class="page-mask" :class="{ active: addIsMasked }">
+        <!--
+        <div class="page-mask" :name=bookList.id>
             <AddBookPopup :isHidden=addIsHidden></AddBookPopup>
             <div class="add-cancel-buttons" :class="{ active: addIsMasked }">
                 <button id="add-cancel-btn" @click="cancelAdd">Cancel</button>
                 <button id="add-btn" type="submit">Add</button>
             </div>
+        </div>-->
+        <div class="test-add" :name=bookList.id>
+            <AddBookPopup id="add-popup" :name=bookList.id></AddBookPopup>
         </div>
-        <div class="test" :name=bookList.id>
+        <div class="test-edit" :name=bookList.id>
             <EditBookPopup id="edit-popup" v-for="book in bookList" :name=book.id :key=book.id :image=book.image :title=book.title :author=book.author :publishingHouse=book.publishingHouse 
             :publishingDate=book.publishingDate :available=book.available :loaned=book.loaned></EditBookPopup>
         </div>
@@ -26,18 +30,22 @@ export default {
     components: { RegisteredBook, AddBookPopup, EditBookPopup },
     data(){
         return{
-            bookList: String, addIsHidden: true, addIsMasked: false
+            bookList: String
         }
     },
     methods:{
         addBook(){
-            this.addIsHidden = false
-            this.addIsMasked = true
-        },
+            var addPopupMask = document.querySelector(".test-add")
+            addPopupMask.classList.add('add-page-mask')
+            var addPopup = document.querySelector("#add-popup")
+            console.log(addPopup)
+            addPopup.style.visibility = "visible"
+        }
+        ,/*
         cancelAdd(){
             this.addIsHidden = true
             this.addIsMasked = false
-        }
+        }*/
     },
     beforeMount() {
         fetch("http://localhost:3000/books", {
@@ -73,43 +81,16 @@ export default {
             padding:0;
         }
     }
-    #add-cancel-btn{
-        width: 100px;
-        height: 30px;
-        background-color: white;
-        color: red;
-        cursor: pointer;
-        margin: 0 1vw 0 1vw;
-    }
-    #add-btn{
-        width: 100px;
-        height: 30px;
-        background-color: white;
-        color: blue;
-        cursor: pointer;
-        margin: 0 1vw 0 1vw;
-    }
-    .add-cancel-buttons{
-        visibility: hidden;
-    }
-    .add-cancel-buttons.active{
-        visibility: visible;
-        width: max-content;
-        margin: 1vw 1vw 0 1vw;
-        position: absolute;
-        margin-left: auto;
-        margin-right: auto;
-        top: 70vh;
-        left: 0;
-        right: 0;
-    }
-    .page-mask.active {
+    .add-page-mask {
         background: rgba(0, 0, 0, 0.5);
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
+    }
+    #add-popup{
+        visibility: hidden;
     }
     .edit-page-mask {
         background: rgba(0, 0, 0, 0.5);

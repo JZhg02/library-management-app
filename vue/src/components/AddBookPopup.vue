@@ -1,35 +1,39 @@
 <template>
     <div class="add-book-popup" v-if="!isHidden">
-        <form class="add-form" action="">
+        <form class="add-form" @submit="postData" method="post">
             <div class="add-input">
                 <label for="title">Title: </label>
-                <input type="text" size="30">
+                <input type="text" name="title" size="30">
             </div>
             <div class="add-input">
                 <label for="author">Author: </label>
-                <input type="text" size="30">
+                <input type="text" name="author" size="30">
             </div>
             <div class="add-input">
-                <label for="house">Publishing house: </label>
-                <input type="text" size="30">
+                <label for="publishingHouse">Publishing house: </label>
+                <input type="text" name="house" size="30">
             </div>
             <div class="add-input">
-                <label for="Year">Year of release: </label>
-                <input type="number">
+                <label for="publishingDate">Publishing Date: </label>
+                <input type="text">
             </div>
             <div class="add-input">
                 <label for="available">Number of books available: </label>
-                <input type="number">
+                <input type="number" name="available">
             </div>
             <div class="add-input">
                 <label for="loaned">Number of books loaned: </label>
-                <input type="number">
+                <input type="number" name="loaned">
             </div>
             <div class="add-input">
-                <label for="cover">Book cover image URL: </label>
+                <label for="image">Book cover image URL: </label>
                 <input type="text" size="30">
             </div>
         </form>
+        <div class="add-cancel-buttons">
+            <button id="add-cancel-btn" @click="cancelAdd">Cancel</button>
+            <button id="add-btn" type="submit" @click="postData">Add</button>
+        </div>
     </div>
 </template>
 
@@ -38,6 +42,20 @@ export default {
     name: 'AddBookPopup',
     props: {
         isHidden: Boolean
+    },
+    methods:{
+        cancelAdd(){
+            var addPopupMask = document.querySelector(".test-add")
+            addPopupMask.classList.remove('add-page-mask')
+            var addPopup = document.querySelectorAll("#add-popup")
+            addPopup.forEach(element => {
+                element.style.visibility = "hidden"
+            })
+        },
+        postData(){
+            console.log("Sending data")
+            this.cancelAdd()
+        }
     }
 }
 </script>
@@ -69,5 +87,27 @@ export default {
                 size:10ch;
             }
         }
+    }
+    #add-cancel-btn{
+        width: 100px;
+        height: 30px;
+        background-color: white;
+        color: red;
+        cursor: pointer;
+        margin: 0 1vw 0 1vw;
+    }
+    #add-btn{
+        width: 100px;
+        height: 30px;
+        background-color: white;
+        color: blue;
+        cursor: pointer;
+        margin: 0 1vw 0 1vw;
+    }
+    .add-cancel-buttons{
+        width: 40vw;
+        margin: 1vw 1vw 0 1vw;
+        display: flex;
+        justify-content: center;
     }
 </style>

@@ -1,17 +1,17 @@
 <template>
     <div class="edit-book-popup" v-if="!isHidden">
-        <form class="edit-form" action="">
+        <form class="edit-form" @submit="postData" method="post">
             <div class="edit-input">
                 <label for="title">Title: </label>
-                <input type="text" size="30" :value="title">
+                <input type="text" name="title" size="30" :value="title">
             </div>
             <div class="edit-input">
                 <label for="author">Author: </label>
-                <input type="text" size="30" :value="author">
+                <input type="text" name="author" size="30" :value="author">
             </div>
             <div class="edit-input">
                 <label for="publishingHouse">Publishing house: </label>
-                <input type="text" size="30" :value="publishingHouse">
+                <input type="text" name="house" size="30" :value="publishingHouse">
             </div>
             <div class="edit-input">
                 <label for="publishingDate">Publishing Date: </label>
@@ -19,11 +19,11 @@
             </div>
             <div class="edit-input">
                 <label for="available">Number of books available: </label>
-                <input type="number" :value="available">
+                <input type="number" name="available" :value="available">
             </div>
             <div class="edit-input">
                 <label for="loaned">Number of books loaned: </label>
-                <input type="number" :value="loaned">
+                <input type="number" name="loaned" :value="loaned">
             </div>
             <div class="edit-input">
                 <label for="image">Book cover image URL: </label>
@@ -32,7 +32,7 @@
         </form>
         <div class="edit-cancel-buttons">
             <button id="edit-cancel-btn" @click="cancelEdit">Cancel</button>
-            <button id="edit-btn" type="submit">Modify</button>
+            <button id="edit-btn" type="submit" @click="postData">Modify</button>
         </div>
     </div>
 </template>
@@ -52,13 +52,16 @@ export default {
     },
     methods:{
         cancelEdit(){
-            var editPopupMask = document.querySelector(".test")
+            var editPopupMask = document.querySelector(".test-edit")
             editPopupMask.classList.remove('edit-page-mask')
             var editPopup = document.querySelectorAll("#edit-popup")
-            console.log(editPopup)
             editPopup.forEach(element => {
                 element.style.visibility = "hidden"
             })
+        },
+        postData(){
+            console.log("Sending data")
+            this.cancelEdit()
         }
     }
 }
