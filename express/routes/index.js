@@ -30,11 +30,18 @@ var employees = [
   - all employees ('/employees')
   - employee by id ('/employee/:id')
 */
+router.post("/post/book", function (req, res, next) {
 
+  console.log(req.body)
+  res.send()
+})
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Libreasy' });
+  console.log(req.path)
+  next()
 });
+
+//===========The request to test==============
 
 // GET all the books
 router.get('/books', function (req, res, next) {
@@ -42,6 +49,8 @@ router.get('/books', function (req, res, next) {
   res.header('Content-Type', 'application/json');  // Specify file type
   res.send(JSON.stringify(books));
 })
+
+//==============================================
 
 // GET a book by id
 router.get('/book/:id', function (req, res, next) {
