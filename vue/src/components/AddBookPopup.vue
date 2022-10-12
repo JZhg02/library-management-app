@@ -82,6 +82,7 @@ export default {
         loaned: this.numLoaned,
         image: this.image,
       };
+      console.log(formData)
       const requestOptions = {
         method: "POST",
         header: {
