@@ -14,7 +14,11 @@ export default {
 
 <style lang="scss">
     .library{
-        margin-top: 120px;
+        margin-top: 15vh;
+
+        @media screen and (max-width: 600px) {
+        margin-top: 10vh;
+        }
     }
     .search-bar{
         width: 30vw;

@@ -2,13 +2,15 @@
     <div class="book-card">
         <img :src=path alt="Book cover">
         <div id="info">
-            <b>Title: {{title}}</b>
-            <b>Author: {{author}}</b>
-            <b>House: {{house}}</b>
-            <b>Date: {{date}}</b>
-            <b>Available: {{available}}</b>
-            <b>Loaned: {{loaned}}</b>
-            <button class="edit-button" :name="nameId" @click="editBook()">Edit</button>
+            <div id="book-text-info">
+                <b class="yellow-title" >Title: <b class="white-info">{{title}}</b></b><br>
+                <b class="yellow-title" >Author: <b class="white-info">{{author}}</b></b><br>
+                <b class="yellow-title" >House: <b class="white-info">{{house}}</b></b><br>
+                <b class="yellow-title" >Date: <b class="white-info">{{date}}</b></b><br>
+                <b class="yellow-title" >Available: <b class="white-info">{{available}}</b></b><br>
+                <b class="yellow-title" >Loaned: <b class="white-info">{{loaned}}</b></b>
+            </div>
+            <button class="book-edit-button" :name="nameId" @click="editBook()">Edit</button>
         </div>
     </div>
 </template>
@@ -81,11 +83,23 @@ export default {
         border-radius: 5px;
         overflow: hidden;
 
-        .edit-button{
+        .book-edit-button{
+            display: none;
             width: 5vw;
             height: 5vh;
             background-color: white;
             cursor: pointer;
+            @media screen and (max-width: 900px) {
+                width: 8vw;
+            }
+            @media screen and (max-width: 500px) {
+                width: 15vw;
+            }
+            border-radius: 5px;
+        }
+        .book-edit-button:hover{
+            background: red;
+            color: white;
         }
         
     }
@@ -94,6 +108,22 @@ export default {
         #info{
             visibility: visible;
             background: black;
+            transition: background 0.3s ease-in;
+            justify-content: center;
+            align-items: center;
+            
+            .yellow-title{
+                color: yellow;
+            }
+            .white-info{
+                color: white;
+            }
+            #book-test-info{
+                justify-content: center;
+            }
+            .book-edit-button{
+                display: block;
+            }
         }
     }
 </style>

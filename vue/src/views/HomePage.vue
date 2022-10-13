@@ -6,11 +6,11 @@
       <img id="home-illustration" src="https://images.freeimages.com/images/previews/5f8/book-1528240.jpg" alt="Book Illustration">
       <div id="button-section">
         <div class="account-buttons">
-          <label for="sign-up">Join us now !</label>
+          <label for="sign-up"><p>Join us now !</p></label>
           <router-link to="/register"><button class="login-button">Sign Up</button></router-link>
         </div>
         <div class="account-buttons">
-          <label for="login">Already have an account ?</label>
+          <label for="login"><p>Already have an account ?</p></label>
           <router-link to="/login"><button class="login-button">Log In</button></router-link>
         </div>
       </div>
@@ -58,27 +58,47 @@ export default {
 
 <style lang="scss">
   .home{
-    margin-top: 80px;
+    margin-top: 10vh;
     display: flex;
     flex-direction: row;
+    
+    @media screen and (max-width: 1200px) {
+      margin-top: 12vh;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media screen and (max-width: 600px) {
+      margin-top: 8vh;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   #welcome-message{
     padding: 3%;
     width: 40vw;
-    height: 58vh;
+    height: fit-content;
     border-radius: 15px;
     background: rgba(35, 34, 34, 0.95);
     display: flex;
     flex-direction: column;
     text-align: start;
     margin: 3vw;
+
+    @media screen and (max-width:1200px) {
+      width: 70vw
+    }
     
     #app-name {
       color: white;
       font-size: 6vw;
       margin: 0;
       text-shadow: 3px 3px black;
+      @media screen and (max-width:1200px) {
+        font-size: 7vw;
+        margin-bottom: 1vh;
+      }
     }
     
     #catch-phrase{
@@ -86,6 +106,9 @@ export default {
       font-size: 2vw;
       margin: 0;
       text-shadow: 2px 2px black;
+      @media screen and (max-width:1200px) {
+        font-size: 3.2vw;
+      }
     }
 
     label{
@@ -108,26 +131,44 @@ export default {
         text-align: center;
         align-items: center;
 
+        p {
+          margin: 0;
+          padding: 0;
+          font-size: 1.5vw;
+          @media screen and (max-width:1200px) {
+            font-size: 3vw;
+          }
+        }
+
         .login-button{
           width: 10vw;
           height: 3vw;
           padding: 2vw auto 2vw auto;
           border-radius: 30px;
           cursor: pointer;
+          @media screen and (max-width: 1200px) {
+            width: 20vw;
+            height: 4vh;
+          }
+        }
+
+        .login-button:hover{
+          color: yellow;
+          background: black;
         }
       }
     }
   }
 
   #right-side{
-    margin:0;
-    padding:0;
+    margin:none;
+    padding:none;
   }
 
   #some-links{
     padding: 5%;
     width: 40vw;
-    height: 7vh;
+    height: fit-content;
     border-radius: 15px;
     background: rgba(86, 48, 16, 0.95);
     display: flex;
@@ -136,6 +177,12 @@ export default {
     margin-left: 1vw;
     margin-top: 3.5vh;
     color: white;
+
+    @media screen and (max-width: 1200px) {
+      width: 70vw;
+      padding: 3%;
+      margin: 3vw;
+    }
 
     p{
       display: inline-block;
@@ -148,7 +195,7 @@ export default {
   #brief-description{
     padding: 5%;
     width: 40vw;
-    height: 42vh;
+    height: fit-content;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.75);
     display: flex;
@@ -156,13 +203,23 @@ export default {
     text-align: start;
     margin: 3vw 2vw 1vw 1vw;
 
+    @media screen and (max-width: 1200px) {
+      width: 70vw;
+      padding: 3%;
+      margin: 3vw;
+      margin-right: 8vw;
+    }
+
     h1{
       font-size: 3vw;
       margin: 0 0 3vh 0;
+      @media screen and (max-width: 1200px) {
+        font-size: 5vw;
+        margin: 1vh 1vh 1vh 1vh;
+      }
     }
 
     #some-text{
-      height:36vh;
       width:38vw;
       display: flex;
       flex-direction: row;
@@ -170,11 +227,21 @@ export default {
       text-align: center;
       font-weight: bold;
 
+      @media screen and (max-width: 1200px) {
+        width: 68vw;
+      }
+
       .feature{
         display: flex;
         flex-direction: column;
+        align-items: center;
+        width: 12vw;
+        @media screen and (max-width: 1200px) {
+          width: 22vw;
+        }
         img{
           width:10vw;
+          padding-bottom: 2vh;
         }
       }
       

@@ -3,15 +3,15 @@
         <form class="add-form" @submit="postData" method="post">
             <div class="add-input">
                 <label for="title">Title: </label>
-                <input type="text" name="title" size="30">
+                <input type="text" name="title">
             </div>
             <div class="add-input">
                 <label for="author">Author: </label>
-                <input type="text" name="author" size="30">
+                <input type="text" name="author">
             </div>
             <div class="add-input">
                 <label for="publishingHouse">Publishing house: </label>
-                <input type="text" name="house" size="30">
+                <input type="text" name="house">
             </div>
             <div class="add-input">
                 <label for="publishingDate">Publishing Date: </label>
@@ -27,7 +27,7 @@
             </div>
             <div class="add-input">
                 <label for="image">Book cover image URL: </label>
-                <input type="text" size="30">
+                <input type="text">
             </div>
         </form>
         <div class="add-cancel-buttons">
@@ -71,6 +71,9 @@ export default {
         top: 0;
         bottom: 0;
         z-index: 100;
+        @media screen and (max-width: 600px) {
+            width: 80vw;
+        }
     }
     .add-form{
         display: flex;
@@ -80,11 +83,19 @@ export default {
         flex-direction: column;
         padding: 1vw;
         border-radius: 10px;
+        transition: width 2s, height 1s ease-in-out;
+
+        @media screen and (max-width: 600px) {
+            justify-content: center;
+            width: 70vw;
+        }
 
         .add-input{
             margin: 2px;
-            input {
-                size:10ch;
+            width: 100%; 
+            padding: .5em 1em .5em 1em;
+            input{
+                border-radius: 5px;
             }
         }
     }
@@ -95,6 +106,11 @@ export default {
         color: red;
         cursor: pointer;
         margin: 0 1vw 0 1vw;
+        border-radius: 5px;
+    }
+    #add-cancel-btn:hover{
+        background-color: red;
+        color: white;
     }
     #add-btn{
         width: 100px;
@@ -103,6 +119,11 @@ export default {
         color: blue;
         cursor: pointer;
         margin: 0 1vw 0 1vw;
+        border-radius: 5px;
+    }
+    #add-btn:hover{
+        background-color: blue;
+        color: white;
     }
     .add-cancel-buttons{
         width: 40vw;

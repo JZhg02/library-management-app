@@ -103,4 +103,9 @@ export default {
     #edit-popup{
         visibility: hidden;
     }
+    
+    #book-button:hover{
+        background: rgba(255, 255, 255, 0.5);
+        transition: background 0.3s ease-out;
+    }
 </style>
