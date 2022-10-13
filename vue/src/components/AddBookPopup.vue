@@ -4,6 +4,7 @@
       class="add-form"
       action="http://localhost:3000/post/book"
       method="post"
+      id="addForm"
     >
       <div class="add-input">
         <label for="title">Title: </label>
@@ -33,11 +34,11 @@
         <label for="image">Book cover image URL: </label>
         <input type="text" v-model="image" />
       </div>
+      <div class="add-cancel-buttons">
+        <button id="add-cancel-btn" @click="cancelAdd">Cancel</button>
+        <button id="add-btn" type="submit" @click="postBook" form="addForm">Add</button>
+      </div>
     </form>
-    <div class="add-cancel-buttons">
-      <button id="add-cancel-btn" @click="cancelAdd">Cancel</button>
-      <button id="add-btn" type="submit" @click="postBook">Add</button>
-    </div>
   </div>
 </template>
 

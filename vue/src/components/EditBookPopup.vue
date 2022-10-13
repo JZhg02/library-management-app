@@ -1,6 +1,6 @@
 <template>
     <div class="edit-book-popup" v-if="!isHidden">
-        <form class="edit-form" @submit="postData" method="post">
+        <form class="edit-form" @submit="postData" method="post" id="editForm">
             <div class="edit-input">
                 <label for="title">Title: </label>
                 <input type="text" name="title" :value="title">
@@ -29,11 +29,11 @@
                 <label for="image">Book cover image URL: </label>
                 <input type="text" :value="image">
             </div>
+            <div class="edit-cancel-buttons">
+                <button id="edit-cancel-btn" @click="cancelEdit">Cancel</button>
+                <button id="edit-btn" type="submit" @click="postData" form="editForm">Modify</button>
+            </div>
         </form>
-        <div class="edit-cancel-buttons">
-            <button id="edit-cancel-btn" @click="cancelEdit">Cancel</button>
-            <button id="edit-btn" type="submit" @click="postData">Modify</button>
-        </div>
     </div>
 </template>
 
