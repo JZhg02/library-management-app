@@ -40,8 +40,6 @@ export default {
             var editPopup = document.querySelectorAll("#edit-popup")
             console.log(editPopup)
             editPopup.forEach(element => {
-                console.log(element.getAttribute("name"))
-                console.log(Array.prototype.indexOf.call(editPopup, element)+1)
                 if(this.nameId == Array.prototype.indexOf.call(editPopup, element)+1){
                     element.style.visibility = "visible"
                 }
