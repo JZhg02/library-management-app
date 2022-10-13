@@ -112,6 +112,9 @@ export default {
   top: 0;
   bottom: 0;
   z-index: 100;
+  @media screen and (max-width: 600px) {
+    width: 80vw;
+  }
 }
 .add-form {
   display: flex;
@@ -122,10 +125,17 @@ export default {
   padding: 1vw;
   border-radius: 10px;
 
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+    width: 70vw;
+  }
+
   .add-input {
     margin: 2px;
-    input {
-      size: 10ch;
+      width: 100%; 
+      padding: .5em 1em .5em 1em;
+    input{
+      border-radius: 5px;
     }
   }
 }
@@ -137,6 +147,10 @@ export default {
   cursor: pointer;
   margin: 0 1vw 0 1vw;
 }
+#edit-cancel-btn:hover{
+  background-color: red;
+  color: white;
+}
 #add-btn {
   width: 100px;
   height: 30px;
@@ -144,6 +158,10 @@ export default {
   color: blue;
   cursor: pointer;
   margin: 0 1vw 0 1vw;
+}
+#edit-btn:hover{
+  background-color: blue;
+  color: white;
 }
 .add-cancel-buttons {
   width: 40vw;
