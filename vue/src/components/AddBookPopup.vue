@@ -146,8 +146,9 @@ export default {
   color: red;
   cursor: pointer;
   margin: 0 1vw 0 1vw;
+  border-radius: 5px;
 }
-#edit-cancel-btn:hover{
+#add-cancel-btn:hover{
   background-color: red;
   color: white;
 }
@@ -158,8 +159,9 @@ export default {
   color: blue;
   cursor: pointer;
   margin: 0 1vw 0 1vw;
+  border-radius: 5px;
 }
-#edit-btn:hover{
+#add-btn:hover{
   background-color: blue;
   color: white;
 }
