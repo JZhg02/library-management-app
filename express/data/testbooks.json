@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Grokking Deep Learning",
+        "author": "Andrew W. Task",
+        "publishingHouse": "Manning Publications",
+        "publishingDate": "01/25/2019",
+        "available": 5,
+        "loaned": 7,
+        "image": "images/Grokking_Deep_Learning.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Harry Potter: The Prequel",
+        "author": "J.K. Rowling",
+        "publishingHouse": "Hogwarts House Editions",
+        "publishingDate": "06/11/2008",
+        "available": 3,
+        "loaned": 8,
+        "image": "images/Harry_Potter_The_Prequel.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Harry Potter and the Chamber of Secrets",
+        "author": "J.K. Rowling",
+        "publishingHouse": "Bloomsbury",
+        "publishingDate": "07/02/1998",
+        "available": 3,
+        "loaned": 4,
+        "image": "images/Harry_Potter_and_the_Chamber_of_Secrets.jpg"
+    }
+]

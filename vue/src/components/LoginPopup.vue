@@ -1,4 +1,5 @@
 <template>
+  <div class="popup">
   <section class="login">
     <form>
       <div class="innerFrame">
@@ -35,17 +36,18 @@
     </table>
     <button @click="check">Update</button>
   </section>
+</div>
 </template>
 
 <script>
 export default {
-  name: "LoginPupup.vue",
+  name: "LoginPupup",
   data() {
     return {
       username: "",
       password: "",
-      isLoggedIn: "",
-      token: "",
+      isLoggedIn: false,
+      token: ""
     };
   },
   methods: {
@@ -94,6 +96,24 @@ export default {
           component.isLoggedIn = data.isLoggedIn;
         });
     },
+    getUsers: function () {
+      let options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      fetch("/api/users", options)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -131,6 +151,7 @@ export default {
   width: 185px;
   margin: auto;
   text-align: left;
+  color: black;
 
   table {
     margin-bottom: 20px;

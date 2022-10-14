@@ -1,16 +1,17 @@
 <template>
-    <div class="">
-        <h1>This is the login page</h1>
-        <h1>This is the login page</h1>
-        <h1>This is the login page</h1>
-    </div>
+    <div></div>
+ <LoginPopup></LoginPopup> 
 </template>
 
 <script>
+import LoginPopup from "../components/LoginPopup.vue";
 export default {
-
+    components: { LoginPopup }
 }
 </script>
 
-<style lang="scss">
+<style>
+div {
+    height: 100px;
+}
 </style>

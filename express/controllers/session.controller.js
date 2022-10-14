@@ -3,14 +3,14 @@ const { Op } = require("sequelize");
 const { v4: uuidv4 } = require('uuid');
 const moment = require('moment');
 const Sequelize = require("../db.connection");
-const Session = require("../models/session.model")(Sequelize.connection, Sequelize.library);
+const Session = require("../models/session.model")(Sequelize.connection, Sequelize.Sequelize);
 
 /* END db initialization */
 
 // Create session for user
 exports.create = async (id) => {
 
-    let validity =  moment().add(25,'minutes').format()
+    let validity = moment().add(25, 'minutes').format()
     const obj = {
         token: uuidv4(),
         validUntil: validity,
@@ -34,12 +34,12 @@ exports.findByUserId = async (id) => {
     var condition = id ? { userId: { [Op.eq]: id } } : null;
     var result = {};
     await Session.findOne({ where: condition })
-    .then(data => {
-        result = data
-    })
-    .catch(e => {
-        console.log("Error", e)
-    })
+        .then(data => {
+            result = data
+        })
+        .catch(e => {
+            console.log("Error", e)
+        })
     return result
 };
 
@@ -48,12 +48,12 @@ exports.findByToken = async (token) => {
     var condition = token ? { token: { [Op.eq]: token } } : null;
     var result = {};
     await Session.findOne({ where: condition })
-    .then(data => {
-        result = data
-    })
-    .catch(e => {
-        console.log("Error", e)
-    })
+        .then(data => {
+            result = data
+        })
+        .catch(e => {
+            console.log("Error", e)
+        })
     return result
 };
 

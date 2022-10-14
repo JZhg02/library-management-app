@@ -1,7 +1,7 @@
 /* BEGIN db initialization */
 const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
-const User = require("../models/user.model")(Sequelize.connection, Sequelize.library);
+const User = require("../models/user.model")(Sequelize.connection, Sequelize.Sequelize);
 /* END db initialization */
 
 // Create
@@ -43,12 +43,12 @@ exports.findByEmail = async (req, res) => {
 
     var result;
     await User.findOne({ where: condition })
-    .then(data => {
-        result = data
-    })
-    .catch(data => {
-        result = data
-    })
+        .then(data => {
+            result = data
+        })
+        .catch(data => {
+            result = data
+        })
     return result
 };
 

@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const Sequelize = require("./db.connection")
+const { Sequelize, connection } = require("./db.connection")
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,7 +12,6 @@ var loginRouter = require('./routes/login')
 var app = express();
 
 const bodyParser = require('body-parser')
-
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
@@ -46,21 +45,34 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-/* BEGIN db initialization */
-// const Op = {}
-// const dbConfig = require("./db.config.js");
-// const Sequelize2 = require("sequelize");
-// const connection = new Sequelize2(dbConfig.DB, dbConfig.USER,
-//   dbConfig.PASSWORD, {
-//   host: dbConfig.HOST,
-//   dialect: dbConfig.dialect,
-//   pool: dbConfig.pool
-// });
-/* END db initialization */
-// const User = require("./models/user.model")(Sequelize.connection, Sequelize.library);
+
+const User = require("./models/user.model")(connection, Sequelize);
+User.sync({ force: false, alter: true });
+
+const Session = require("./models/session.model")(connection, Sequelize);
+Session.sync({ force: false, alter: true });
+
+const Book = require("./models/book.model")(connection, Sequelize);
+Book.sync({force: false, alter:true})
+
+// Initialize Book table
+// var books = require('./data/books.json')
+// for (const book of books) {
+//   Book.create(book)
+// }
+
+
+
+// User.create({fullname: "CorentinP",
+// email:"test@gmail.com",
+// phone:"xxxxxx"
+// })
+
+
+// const User = require("./models/user.model")(Sequelize.connection, Sequelize.Sequelize);
 // User.sync({ force: false, alter: true });
 
-// const Session = require("./models/session.model")(Sequelize.connection, Sequelize.library);
+// const Session = require("./models/session.model")(Sequelize.connection, Sequelize.Sequelize);
 // Session.belongsTo(User);
 // Session.sync({ force: false, alter: true });
 

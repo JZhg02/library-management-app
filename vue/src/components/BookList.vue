@@ -75,6 +75,7 @@ export default {
         return response.json();
       })
       .then((data) => {
+        console.log(data)
         component.bookList = data;
       });
   },
