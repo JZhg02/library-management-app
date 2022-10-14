@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-book-popup" v-if="!isHidden">
+  <div class="edit-book-popup" >
     <form class="edit-form" id="editForm">
       <div class="edit-input">
         <label for="title">Title: </label>
@@ -43,7 +43,6 @@
 export default {
   name: "EditBookPopup",
   props: {
-    isHidden: Boolean,
     nameId: Number,
     title: String,
     author: String,

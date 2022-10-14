@@ -39,6 +39,9 @@
         :loaned="book.loaned"
       ></EditBookPopup>
     </div>
+    <div class="test-delete" :name="bookList.id">
+      <DeleteBookPopup v-for="book in bookList" :key="book.id" id="delete-popup" :thisBookId="book.id"></DeleteBookPopup>
+    </div>
   </div>
 </template>
 
@@ -46,9 +49,10 @@
 import RegisteredBook from "@/components/RegisteredBook.vue";
 import AddBookPopup from "@/components/AddBookPopup.vue";
 import EditBookPopup from "@/components/EditBookPopup.vue";
+import DeleteBookPopup from "@/components/DeleteBookPopup.vue"
 export default {
   name: "BookList",
-  components: { RegisteredBook, AddBookPopup, EditBookPopup },
+  components: { RegisteredBook, AddBookPopup, EditBookPopup, DeleteBookPopup },
   data() {
     return {
       bookList: String,
@@ -60,11 +64,7 @@ export default {
       addPopupMask.classList.add("add-page-mask");
       var addPopup = document.querySelector("#add-popup");
       addPopup.style.visibility = "visible";
-    } /*
-        cancelAdd(){
-            this.addIsHidden = true
-            this.addIsMasked = false
-        }*/,
+    }
   },
   beforeMount() {
     var component = this;
@@ -123,6 +123,17 @@ export default {
   left: 0;
 }
 #edit-popup {
+  visibility: hidden;
+}
+.delete-page-mask {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#delete-popup {
   visibility: hidden;
 }
 

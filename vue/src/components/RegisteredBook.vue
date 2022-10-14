@@ -1,5 +1,5 @@
 <template>
-    <div class="book-card">
+    <div class="book-card" :id="nameId">
         <img :src=path alt="Book cover">
         <div id="info">
             <div id="book-text-info">
@@ -10,7 +10,10 @@
                 <b class="yellow-title" >Available: <b class="white-info">{{available}}</b></b><br>
                 <b class="yellow-title" >Loaned: <b class="white-info">{{loaned}}</b></b>
             </div>
-            <button class="book-edit-button" :name="nameId" @click="editBook()">Edit</button>
+            <div id="section-btn">
+                <button class="book-edit-button" :name="nameId" @click="editBook()">Edit</button>
+                <button class="book-delete-button" :name="nameId" @click="deleteBook()">Delete</button>
+            </div>
         </div>
     </div>
 </template>
@@ -40,6 +43,16 @@ export default {
             var editPopup = document.querySelectorAll("#edit-popup")
             editPopup.forEach(element => {
                 if(this.nameId == Array.prototype.indexOf.call(editPopup, element)+1){
+                    element.style.visibility = "visible"
+                }
+            })
+        },
+        deleteBook(){
+            var deletePopupMask = document.querySelector(".test-delete")
+            deletePopupMask.classList.add('delete-page-mask')
+            var deletePopup = document.querySelectorAll("#delete-popup")
+            deletePopup.forEach(element => {
+                if(this.nameId == Array.prototype.indexOf.call(deletePopup, element)+1){
                     element.style.visibility = "visible"
                 }
             })
@@ -87,10 +100,36 @@ export default {
             }
             border-radius: 5px;
         }
-        .book-edit-button:hover{
-            background: red;
-            color: white;
+        .book-delete-button{
+            display: none;
+            width: 5vw;
+            height: 5vh;
+            background-color: white;
+            cursor: pointer;
+            @media screen and (max-width: 900px) {
+                width: 8vw;
+            }
+            @media screen and (max-width: 500px) {
+                width: 15vw;
+            }
+            border-radius: 5px;
         }
+
+        #section-btn{
+
+            display: flex;
+            flex-direction: row;
+
+            .book-edit-button:hover{
+                background: blue;
+                color: white;
+            }
+            .book-delete-button:hover{
+                background: red;
+                color: white;
+            }
+        }
+
         
     }
 
@@ -112,6 +151,9 @@ export default {
                 justify-content: center;
             }
             .book-edit-button{
+                display: block;
+            }
+            .book-delete-button{
                 display: block;
             }
         }

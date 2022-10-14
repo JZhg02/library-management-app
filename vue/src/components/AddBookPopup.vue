@@ -1,5 +1,5 @@
 <template>
-  <div class="add-book-popup" v-if="!isHidden">
+  <div class="add-book-popup" >
     <form class="add-form" id="addForm">
       <div class="add-input">
         <label for="title">Title: </label>
@@ -52,9 +52,6 @@ export default {
       loaned: 0,
       image: "",
     };
-  },
-  props: {
-    isHidden: Boolean,
   },
   methods: {
     closePopup() {
