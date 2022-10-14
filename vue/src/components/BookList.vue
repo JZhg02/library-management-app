@@ -28,7 +28,7 @@
       <EditBookPopup
         id="edit-popup"
         v-for="book in bookList"
-        :name="book.id"
+        :nameId="book.id"
         :key="book.id"
         :image="book.image"
         :title="book.title"
@@ -59,7 +59,6 @@ export default {
       var addPopupMask = document.querySelector(".test-add");
       addPopupMask.classList.add("add-page-mask");
       var addPopup = document.querySelector("#add-popup");
-      console.log(addPopup);
       addPopup.style.visibility = "visible";
     } /*
         cancelAdd(){
@@ -83,51 +82,51 @@ export default {
 </script>
 
 <style lang="scss">
-    .myList{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    #book-button{
-        align-self: center;
-        border-radius: 4px;
-        background: transparent;
-        height: 250px;
-        width: 170px;
-        margin:1vw;
-        text-align: center;
-        align-items: center;
-        cursor: pointer;
-        h1{
-            margin:0;
-            padding:0;
-        }
-    }
-    .add-page-mask {
-        background: rgba(0, 0, 0, 0.5);
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-    #add-popup{
-        visibility: hidden;
-    }
-    .edit-page-mask {
-        background: rgba(0, 0, 0, 0.5);
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-    #edit-popup{
-        visibility: hidden;
-    }
-    
-    #book-button:hover{
-        background: rgba(255, 255, 255, 0.5);
-        transition: background 0.3s ease-out;
-    }
+.myList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#book-button {
+  align-self: center;
+  border-radius: 4px;
+  background: transparent;
+  height: 250px;
+  width: 170px;
+  margin: 1vw;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+}
+.add-page-mask {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#add-popup {
+  visibility: hidden;
+}
+.edit-page-mask {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#edit-popup {
+  visibility: hidden;
+}
+
+#book-button:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.3s ease-out;
+}
 </style>

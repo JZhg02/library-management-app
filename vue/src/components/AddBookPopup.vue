@@ -1,11 +1,6 @@
 <template>
   <div class="add-book-popup" v-if="!isHidden">
-    <form
-      class="add-form"
-      action="http://localhost:3000/post/book"
-      method="post"
-      id="addForm"
-    >
+    <form class="add-form" id="addForm">
       <div class="add-input">
         <label for="title">Title: </label>
         <input type="text" name="title" v-model="title" />
@@ -24,19 +19,21 @@
       </div>
       <div class="add-input">
         <label for="available">Number of books available: </label>
-        <input type="number" name="available" v-model="numAvailable" />
+        <input type="number" name="available" v-model="available" />
       </div>
       <div class="add-input">
         <label for="loaned">Number of books loaned: </label>
-        <input type="number" name="loaned" v-model="numLoaned" />
+        <input type="number" name="loaned" v-model="loaned" />
       </div>
       <div class="add-input">
         <label for="image">Book cover image URL: </label>
         <input type="text" v-model="image" />
       </div>
       <div class="add-cancel-buttons">
-        <button id="add-cancel-btn" @click="cancelAdd">Cancel</button>
-        <button id="add-btn" type="submit" @click="postBook" form="addForm">Add</button>
+        <button id="add-cancel-btn" @click="closePopup">Cancel</button>
+        <button id="add-btn" type="submit" @click="postData" form="addForm">
+          Add
+        </button>
       </div>
     </form>
   </div>
@@ -51,8 +48,8 @@ export default {
       author: "",
       publishingHouse: "",
       publishingDate: "",
-      numAvailable: 0,
-      numLoaned: 0,
+      available: 0,
+      loaned: 0,
       image: "",
     };
   },
@@ -60,7 +57,7 @@ export default {
     isHidden: Boolean,
   },
   methods: {
-    cancelAdd() {
+    closePopup() {
       var addPopupMask = document.querySelector(".test-add");
       addPopupMask.classList.remove("add-page-mask");
       var addPopup = document.querySelectorAll("#add-popup");
@@ -69,34 +66,22 @@ export default {
       });
     },
     postData() {
-      console.log("Sending data");
-      this.cancelAdd();
-    },
-    //============ POST request to test============
-    postBook() {
-      let formData = {
-        title: this.title,
-        author: this.author,
-        publishingHouse: this.publishingHouse,
-        publishingDate: this.publishingDate,
-        available: this.numAvailable,
-        loaned: this.numLoaned,
-        image: this.image,
-      };
-      console.log(formData)
       const requestOptions = {
         method: "POST",
-        header: {
-          "Content-Type": "application/json",
-        },
-
-        // type: ['application/json', 'text/plain'],
-        body: "{ test: 1 }",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: -1,
+          title: this.title,
+          author: this.author,
+          publishingHouse: this.publishingHouse,
+          publishingDate: this.publishingDate,
+          available: this.available,
+          loaned: this.loaned,
+          image: this.image,
+        }),
       };
-      fetch("/api/post/book", requestOptions).then((response) => {
-        console.log(response);
-      });
-      //===========================================
+      fetch("api/post/book", requestOptions)
+      this.closePopup();
     },
   },
 };
@@ -133,9 +118,9 @@ export default {
 
   .add-input {
     margin: 2px;
-      width: 100%; 
-      padding: .5em 1em .5em 1em;
-    input{
+    width: 100%;
+    padding: 0.5em 1em 0.5em 1em;
+    input {
       border-radius: 5px;
     }
   }
@@ -149,7 +134,7 @@ export default {
   margin: 0 1vw 0 1vw;
   border-radius: 5px;
 }
-#add-cancel-btn:hover{
+#add-cancel-btn:hover {
   background-color: red;
   color: white;
 }
@@ -162,7 +147,7 @@ export default {
   margin: 0 1vw 0 1vw;
   border-radius: 5px;
 }
-#add-btn:hover{
+#add-btn:hover {
   background-color: blue;
   color: white;
 }

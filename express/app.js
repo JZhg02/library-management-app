@@ -57,11 +57,11 @@ app.use(function (err, req, res, next) {
 //   pool: dbConfig.pool
 // });
 /* END db initialization */
-const User = require("./models/user.model")(Sequelize.connection, Sequelize.library);
-User.sync({ force: false, alter: true });
+// const User = require("./models/user.model")(Sequelize.connection, Sequelize.library);
+// User.sync({ force: false, alter: true });
 
-const Session = require("./models/session.model")(Sequelize.connection, Sequelize.library);
-Session.belongsTo(User);
-Session.sync({ force: false, alter: true });
+// const Session = require("./models/session.model")(Sequelize.connection, Sequelize.library);
+// Session.belongsTo(User);
+// Session.sync({ force: false, alter: true });
 
 module.exports = app;

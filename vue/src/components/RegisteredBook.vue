@@ -26,11 +26,11 @@ export default {
         available: Number,
         loaned: Number,
         imagePath: String,
-        nameId: Number
+        nameId: Number,
     },
     data(){
         return{
-            path: "http://localhost:3000/" + this.imagePath
+            path: "api/" + this.imagePath
         }
     },
     methods:{
@@ -38,20 +38,12 @@ export default {
             var editPopupMask = document.querySelector(".test-edit")
             editPopupMask.classList.add('edit-page-mask')
             var editPopup = document.querySelectorAll("#edit-popup")
-            console.log(editPopup)
             editPopup.forEach(element => {
                 if(this.nameId == Array.prototype.indexOf.call(editPopup, element)+1){
                     element.style.visibility = "visible"
                 }
             })
         }
-        /*let cartBtn = document.querySelectorAll("#cart-btn");
-        cartBtn.forEach(element => {
-            element.addEventListener("dblclick", function () {
-                let orderBtn = document.querySelector("#order-btn");
-                orderBtn.style.background = "darkred";
-            });
-        });*/
     },
 }
 </script>
