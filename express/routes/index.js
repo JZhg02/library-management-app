@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const fs = require('fs');
 const { Sequelize, connection } = require("./../db.connection");
 const BookTable = require("./../models/book.model")(connection, Sequelize);
 
@@ -25,10 +24,12 @@ const BookTable = require("./../models/book.model")(connection, Sequelize);
 // Working
 router.post("/post/book", async function (req, res, next) {
     console.log('POST /post/book')
-    const books = await BookTable.findAll()
-    console.log(books.length)
-    req.body.id = books.length + 1
-    BookTable.create(req.body)
+    await BookTable.findAll()
+        .then(books => {
+            req.body.id = books.length + 1
+            BookTable.create(req.body)
+        })
+        .catch(e => console.log("Error", e))
 })
 
 // Working
@@ -39,13 +40,17 @@ router.post("/post/edit/:id", async function (req, res, next) {
         {
             where: { id: req.params.id }
         }
-    )
+    ).catch(e => console.log("Error", e))
 })
 
 router.get('/books', async function (req, res, next) {
-    const books = await BookTable.findAll()
-    res.header('Content-Type', 'application/json');  // Specify file type
-    res.send(JSON.stringify(books));
+    await BookTable.findAll()
+        .then(books => {
+            res.header('Content-Type', 'application/json');  // Specify file type
+            res.send(JSON.stringify(books));
+        })
+        .catch(e => console.log("Error", e)
+        )
 })
 
 // Not used

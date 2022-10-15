@@ -46,34 +46,34 @@ app.use(function (err, req, res, next) {
 });
 
 
+
+// Create tables
 const User = require("./models/user.model")(connection, Sequelize);
-User.sync({ force: false, alter: true });
-
 const Session = require("./models/session.model")(connection, Sequelize);
-Session.sync({ force: false, alter: true });
-
 const Book = require("./models/book.model")(connection, Sequelize);
-Book.sync({force: false, alter:true})
+
+// Prevent DeadLock (Session is link to User)
+User.sync({ force: false, alter: true })
+  .then(() => {
+    Session.belongsTo(User); // must wait User finish 
+    Session.sync({ force: false, alter: true });
+  })
+
+// Print User table
+.then(User.findAll()
+  .then(table => {
+    console.log("User :")
+    console.log(JSON.stringify(table, null, 2))
+    console.log()
+  }))
+
+Book.sync({ force: false, alter: true })
+
 
 // Initialize Book table
 // var books = require('./data/books.json')
 // for (const book of books) {
 //   Book.create(book)
 // }
-
-
-
-// User.create({fullname: "CorentinP",
-// email:"test@gmail.com",
-// phone:"xxxxxx"
-// })
-
-
-// const User = require("./models/user.model")(Sequelize.connection, Sequelize.Sequelize);
-// User.sync({ force: false, alter: true });
-
-// const Session = require("./models/session.model")(Sequelize.connection, Sequelize.Sequelize);
-// Session.belongsTo(User);
-// Session.sync({ force: false, alter: true });
 
 module.exports = app;

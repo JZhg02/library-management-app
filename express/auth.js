@@ -4,7 +4,8 @@ const sessions = require("./controllers/session.controller");
 exports.login = async (req, res) => {
     let user = await users.findByEmail(req, res)
     // if the user exists and password matches
-    console.log(user.id,user.password,req.password)
+    console.log()
+    console.log(user.id,user.password,req.body.password)
     if (user && user.id && user.password == req.body.password) {
 
         // search for a session for this user
@@ -17,7 +18,7 @@ exports.login = async (req, res) => {
         // if the session exists and is not expired, go on
         // else, create a session
         if (session && !isTokenExpired) {
-            console.log("use existing")
+            console.log("user existing")
             token = session.token
         } else {
             console.log("create new")
@@ -26,7 +27,7 @@ exports.login = async (req, res) => {
                 token = session.token
             }
         }
-        res.send(JSON.stringify({ token: token }))
+        res.send(JSON.stringify({ token: token, id: user.id }))
     } else {
         res.status(403).send("Access denied")
     }

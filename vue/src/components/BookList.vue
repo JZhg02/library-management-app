@@ -49,7 +49,12 @@
 import RegisteredBook from "@/components/RegisteredBook.vue";
 import AddBookPopup from "@/components/AddBookPopup.vue";
 import EditBookPopup from "@/components/EditBookPopup.vue";
+
 import DeleteBookPopup from "@/components/DeleteBookPopup.vue"
+<<<<<<< Updated upstream
+=======
+import { globalStorage } from "@/main";
+>>>>>>> Stashed changes
 export default {
   name: "BookList",
   components: { RegisteredBook, AddBookPopup, EditBookPopup, DeleteBookPopup },
@@ -68,14 +73,16 @@ export default {
   },
   beforeMount() {
     var component = this;
-    fetch("/api/books", {
-      method: "GET",
+    fetch("/api/users/books/" + globalStorage.$id, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: globalStorage.$token }),
     })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data)
+        console.log(data);
         component.bookList = data;
       });
   },

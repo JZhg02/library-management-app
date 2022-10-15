@@ -7,6 +7,9 @@ const User = require("../models/user.model")(Sequelize.connection, Sequelize.Seq
 // Create
 exports.create = (req, res) => {
 
+    console.log(
+        "users.create ==============="
+    )
     // Validate request
     if (!req.body.fullname || !req.body.email || !req.body.phone) {
         res.status(400).send({
@@ -54,6 +57,7 @@ exports.findByEmail = async (req, res) => {
 
 // Get all records with a certain name (sent from the front-end)
 exports.findAll = (req, res) => {
+    console.log('users.findAll ==================')
     User.findAll()
         .then(data => {
             res.send(data);

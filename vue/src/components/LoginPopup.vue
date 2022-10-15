@@ -1,55 +1,62 @@
 <template>
   <div class="popup">
-  <section class="login">
-    <form>
-      <div class="innerFrame">
-        <div class="field">
-          <label for="username">Email</label>
-          <input type="text" name="username" id="username" v-model="username" />
+    <section class="login">
+      <form>
+        <div class="innerFrame">
+          <div class="field">
+            <label for="username">Email</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              v-model="username"
+            />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              v-model="password"
+            />
+          </div>
+          <button @click="login" type="button">Submit</button>
         </div>
-        <div class="field">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            v-model="password"
-          />
-        </div>
-        <button @click="login" type="button">Submit</button>
-      </div>
-    </form>
-  </section>
+      </form>
+    </section>
 
-  <div class="separator"></div>
+    <div class="separator"></div>
 
-  <section class="test">
-    <table>
-      <tr>
-        <td>Is logged in?</td>
-        <td>{{ isLoggedIn }}</td>
-      </tr>
-      <tr>
-        <td>Token UUID</td>
-        <td>{{ token }}</td>
-      </tr>
-    </table>
-    <button @click="check">Update</button>
-  </section>
-</div>
+    <section class="test">
+      <table>
+        <tr>
+          <td>Is logged in?</td>
+          <td>{{ isLoggedIn }}</td>
+        </tr>
+        <tr>
+          <td>Token UUID</td>
+          <td>{{ token }}</td>
+        </tr>
+      </table>
+      <button @click="check">Update</button>
+    </section>
+  </div>
 </template>
 
 <script>
+import { globalStorage } from "../main.js";
 export default {
   name: "LoginPupup",
   data() {
     return {
-      username: "",
-      password: "",
+      username: "test@gmail.com",
+      password: "password",
       isLoggedIn: false,
-      token: ""
+      token: globalStorage.$token,
     };
   },
+
   methods: {
     login: function () {
       var component = this;
@@ -68,9 +75,17 @@ export default {
           return response.json();
         })
         .then((data) => {
+          // store token in global variable 'globalStorage'
+          // and write it in localstorage
           component.isLoggedIn = true;
+          globalStorage.$token = data.token;
           component.token = data.token;
-          console.log(component.token);
+          globalStorage.$id = data.id;
+          localStorage.setItem("token", globalStorage.$token);
+          console.log("token :");
+          console.log(globalStorage.$token);
+          console.log("id :");
+          console.log(globalStorage.$id);
         })
         .catch((error) => {
           console.log(error);
