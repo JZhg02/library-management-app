@@ -51,10 +51,7 @@ import AddBookPopup from "@/components/AddBookPopup.vue";
 import EditBookPopup from "@/components/EditBookPopup.vue";
 
 import DeleteBookPopup from "@/components/DeleteBookPopup.vue"
-<<<<<<< Updated upstream
-=======
 import { globalStorage } from "@/main";
->>>>>>> Stashed changes
 export default {
   name: "BookList",
   components: { RegisteredBook, AddBookPopup, EditBookPopup, DeleteBookPopup },
