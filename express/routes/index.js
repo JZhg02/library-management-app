@@ -6,11 +6,20 @@ const BookTable = require("./../models/book.model")('books', connection, Sequeli
 // Working
 router.post("/post/book", async function (req, res, next) {
     console.log('POST /post/book')
+<<<<<<< Updated upstream
 
     maxId('books').then(maxId => {
         req.body.id = maxId + 1
         BookTable.create(req.body)
     }).catch(e => console.log("Error", e))
+=======
+    await BookTable.findAll()
+        .then(books => {
+            req.body.id = books.length + 1
+            BookTable.create(req.body)
+        })
+        .catch(e => console.log("Error", e))
+>>>>>>> Stashed changes
 })
 
 // Working

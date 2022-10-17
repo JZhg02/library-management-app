@@ -45,7 +45,11 @@
 </template>
 
 <script>
+<<<<<<< Updated upstream
 import {  globalProperties } from "../main.js";
+=======
+import { globalStorage } from "../main.js";
+>>>>>>> Stashed changes
 export default {
   name: "LoginPupup",
   data() {
@@ -53,7 +57,11 @@ export default {
       username: "test@gmail.com",
       password: "password",
       isLoggedIn: false,
+<<<<<<< Updated upstream
       token: globalProperties.$token,
+=======
+      token: globalStorage.$token,
+>>>>>>> Stashed changes
     };
   },
 
@@ -78,6 +86,7 @@ export default {
           // store token in global variable 'globalStorage'
           // and write it in localstorage
           component.isLoggedIn = true;
+<<<<<<< Updated upstream
           globalProperties.$token = data.token;
           component.token = data.token;
           globalProperties.$id = data.id;
@@ -86,6 +95,16 @@ export default {
           console.log(globalProperties.$token);
           console.log("id :");
           console.log(globalProperties.$id);
+=======
+          globalStorage.$token = data.token;
+          component.token = data.token;
+          globalStorage.$id = data.id;
+          localStorage.setItem("token", globalStorage.$token);
+          console.log("token :");
+          console.log(globalStorage.$token);
+          console.log("id :");
+          console.log(globalStorage.$id);
+>>>>>>> Stashed changes
         })
         .catch((error) => {
           console.log(error);

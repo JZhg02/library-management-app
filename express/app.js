@@ -49,8 +49,14 @@ app.use(function (err, req, res, next) {
 
 
 // Create tables
+<<<<<<< Updated upstream
 const User = require("./models/user.model")(connection, Sequelize,);
 const Session = require("./models/session.model")(connection, Sequelize);
+=======
+const User = require("./models/user.model")(connection, Sequelize);
+const Session = require("./models/session.model")(connection, Sequelize);
+const Book = require("./models/book.model")(connection, Sequelize);
+>>>>>>> Stashed changes
 
 // Prevent DeadLock (Session is link to User)
 User.sync({ force: false, alter: true })
@@ -59,6 +65,7 @@ User.sync({ force: false, alter: true })
     Session.sync({ force: false, alter: true });
   })
 
+<<<<<<< Updated upstream
   // Print User table
   .then(User.findAll()
     .then(table => {
@@ -70,6 +77,18 @@ User.sync({ force: false, alter: true })
 
 
 // Book.sync({ force: false, alter: true })
+=======
+// Print User table
+.then(User.findAll()
+  .then(table => {
+    console.log("User :")
+    console.log(JSON.stringify(table, null, 2))
+    console.log()
+  }))
+
+Book.sync({ force: false, alter: true })
+
+>>>>>>> Stashed changes
 
 // Initialize Book table
 // var books = require('./data/books.json')
