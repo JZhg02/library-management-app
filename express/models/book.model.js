@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (tableName, sequelize, Sequelize) => {
     const Book = sequelize.define("book", {
         title: {
             type: Sequelize.STRING
@@ -21,6 +21,6 @@ module.exports = (sequelize, Sequelize) => {
         image: {
             type: Sequelize.STRING
         }
-    }, {timestamps: true});
+    }, {timestamps: true, tableName: tableName, freezeTableName: true});
     return Book
 }

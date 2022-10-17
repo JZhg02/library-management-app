@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const { Model } = require('sequelize')
 const { Sequelize, connection } = require("./db.connection")
 
 var indexRouter = require('./routes/index');
@@ -48,9 +49,8 @@ app.use(function (err, req, res, next) {
 
 
 // Create tables
-const User = require("./models/user.model")(connection, Sequelize);
+const User = require("./models/user.model")(connection, Sequelize,);
 const Session = require("./models/session.model")(connection, Sequelize);
-const Book = require("./models/book.model")(connection, Sequelize);
 
 // Prevent DeadLock (Session is link to User)
 User.sync({ force: false, alter: true })
@@ -59,16 +59,17 @@ User.sync({ force: false, alter: true })
     Session.sync({ force: false, alter: true });
   })
 
-// Print User table
-.then(User.findAll()
-  .then(table => {
-    console.log("User :")
-    console.log(JSON.stringify(table, null, 2))
-    console.log()
-  }))
+  // Print User table
+  .then(User.findAll()
+    .then(table => {
+      console.log("User :")
+      console.log(JSON.stringify(table, null, 2))
+      console.log()
+    }))
 
-Book.sync({ force: false, alter: true })
 
+
+// Book.sync({ force: false, alter: true })
 
 // Initialize Book table
 // var books = require('./data/books.json')

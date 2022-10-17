@@ -3,7 +3,7 @@ var router = express.Router();
 const users = require("../controllers/user.controller.js")
 const auth = require("../auth.js")
 const { Sequelize, connection } = require("./../db.connection");
-const BookTable = require("./../models/book.model")(connection, Sequelize);
+const BookTable = require("./../models/book.model")('books', connection, Sequelize);
 
 // Login middleware
 router.use(async (req, res, next) => {
@@ -28,6 +28,8 @@ router.post('/books/:id', async function (req, res, next) {
     )
   console.log('--------------')
   console.log("id : " + req.params.id)
+  console.log("TODO access table from id")
+  console.log('--------------')
 })
 
 

@@ -51,7 +51,7 @@ import AddBookPopup from "@/components/AddBookPopup.vue";
 import EditBookPopup from "@/components/EditBookPopup.vue";
 
 import DeleteBookPopup from "@/components/DeleteBookPopup.vue"
-import { globalStorage } from "@/main";
+import { globalProperties } from "@/main";
 export default {
   name: "BookList",
   components: { RegisteredBook, AddBookPopup, EditBookPopup, DeleteBookPopup },
@@ -70,10 +70,10 @@ export default {
   },
   beforeMount() {
     var component = this;
-    fetch("/api/users/books/" + globalStorage.$id, {
+    fetch("/api/users/books/" + globalProperties.$id, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: globalStorage.$token }),
+      body: JSON.stringify({ token: globalProperties.$token }),
     })
       .then((response) => {
         return response.json();

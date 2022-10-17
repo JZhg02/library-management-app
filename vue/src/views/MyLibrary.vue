@@ -9,14 +9,14 @@
 
 <script>
 import BookList from "@/components/BookList.vue";
-import { globalStorage } from "../main.js";
+import { globalProperties } from "../main.js";
 export default {
   name: "MyLibrary",
   components: { BookList },
   data() {
     return {
       isLoggedIn: false,
-      token: globalStorage.$token,
+      token: globalProperties.$token,
     };
   },
   beforeMount() {

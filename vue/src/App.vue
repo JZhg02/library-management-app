@@ -1,28 +1,44 @@
 <template>
   <div>
     <HomeHeader></HomeHeader>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import HomeHeader from './components/HomeHeader.vue';
+import HomeHeader from "./components/HomeHeader.vue";
+import { getId, isTokenInLocalStorage, isLoggedIn } from "./funcs";
+import { globalProperties } from "./main.js";
 export default {
-    components: { HomeHeader }
-}
+  name: "App",
+  components: { HomeHeader },
+  async mounted() {
+
+    // if a token is stored in localstorage, assign it to gloabal variable '$token'
+    isTokenInLocalStorage(globalProperties);
+
+    // Get Id based on token
+    await getId(globalProperties.$token, globalProperties);
+
+    // check if logged in
+    if (!(await isLoggedIn(globalProperties))) {
+      alert("Please log in (token expired)")
+      this.$router.push('/login')
+    }
+  },
+};
 </script>
 
 
 <style lang="scss">
-
-body{
-  background: url(https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg) center center fixed;
+body {
+  background: url(https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg)
+    center center fixed;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
   -ms-background-size: 100%;
   -o-background-size: 100%;
   background-size: 100%;
   margin: 0;
-  
 }
 </style>

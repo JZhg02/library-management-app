@@ -1,41 +1,57 @@
-function getId(token, app) {
-    fetch("/api/login/getId", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: token })
-    })
-        .then(response => response.json())
-        .then(data => {
-            app.config.globalProperties.$id = data.id
-            console.log("(server) id: " + app.config.globalProperties.$id)
+// Get Id based on token
+async function getId(token, globalProperties) {
+    try {
+        const response = await fetch("/api/login/getId", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: token })
         })
+        const data = await response.json()
+
+        globalProperties.$id = data.id
+    } catch (err) {
+        console.log(err)
+    }
+
+    console.log("(server) id: " + globalProperties.$id)
 }
 
-function isTokenInLocalStorage(app) {
-    app.config.globalProperties.$token = localStorage.getItem('token')
-    if (app.config.globalProperties.$token == undefined) {
-        app.config.globalProperties.$token = ''
+// if a token is stored in localstorage, assign it to gloabal variable '$token'
+function isTokenInLocalStorage(globalProperties) {
+    // get token from local storage
+    globalProperties.$token = localStorage.getItem('token')
+
+    // if there is no token in local storage, return false 
+    // else return true
+    if (globalProperties.$token == undefined) {
+        globalProperties.$token = ''
         console.log("no token found in local storage")
-        alert("Please log in !")
         return false
     }
     else {
-        console.log("(localStorage) token: " + app.config.globalProperties.$token)
+        console.log("(localStorage) token: " + globalProperties.$token)
         return true
     }
 }
 
-function isLoggedIn(app) {
-    fetch("/api/login/check", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ token: app.config.globalProperties.$token })
-    })
-        .then(response => response.json())
-        .then((data) => {
-            console.log("(server) Logged in ? : " + data.isLoggedIn)
+// check if logged in
+async function isLoggedIn(globalProperties) {
+    let data;
+    try {
+        const response = await fetch("/api/login/check", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ token: globalProperties.$token })
         })
+        //.then(response => response.json()).then(data => console.log(data))
+        data = await response.json()
+    } catch (err) {
+        console.log(err)
+    }
+    console.log("(server) Logged in ? : " + data.isLoggedIn)
+    return data.isLoggedIn
 }
+
 export { getId, isTokenInLocalStorage, isLoggedIn }

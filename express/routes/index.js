@@ -1,35 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const { Sequelize, connection } = require("./../db.connection");
-const BookTable = require("./../models/book.model")(connection, Sequelize);
-
-// var employees = [
-//   {
-//     id: 1,
-//     name: "Jacques ZHANG",
-//     password: "12345678",
-//   },
-//   {
-//     id: 2,
-//     name: "Mehdi WASKAR",
-//     password: "12345678",
-//   },
-//   {
-//     id: 3,
-//     name: "Corentin PRADIE",
-//     password: "12345678",
-//   },
-// ]
+const BookTable = require("./../models/book.model")('books', connection, Sequelize);
 
 // Working
 router.post("/post/book", async function (req, res, next) {
     console.log('POST /post/book')
-    await BookTable.findAll()
-        .then(books => {
-            req.body.id = books.length + 1
-            BookTable.create(req.body)
-        })
-        .catch(e => console.log("Error", e))
+
+    maxId('books').then(maxId => {
+        req.body.id = maxId + 1
+        BookTable.create(req.body)
+    }).catch(e => console.log("Error", e))
 })
 
 // Working
@@ -52,6 +33,11 @@ router.get('/books', async function (req, res, next) {
         .catch(e => console.log("Error", e)
         )
 })
+
+async function maxId(tableName) {
+    const maxId = await connection.query("SELECT MAX(id) FROM " + tableName)
+    return maxId[0][0]['MAX(id)']
+}
 
 // Not used
 // router.get('/book/:id', function (req, res, next) {

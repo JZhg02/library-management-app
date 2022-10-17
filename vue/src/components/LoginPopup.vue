@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { globalStorage } from "../main.js";
+import {  globalProperties } from "../main.js";
 export default {
   name: "LoginPupup",
   data() {
@@ -53,7 +53,7 @@ export default {
       username: "test@gmail.com",
       password: "password",
       isLoggedIn: false,
-      token: globalStorage.$token,
+      token: globalProperties.$token,
     };
   },
 
@@ -78,14 +78,14 @@ export default {
           // store token in global variable 'globalStorage'
           // and write it in localstorage
           component.isLoggedIn = true;
-          globalStorage.$token = data.token;
+          globalProperties.$token = data.token;
           component.token = data.token;
-          globalStorage.$id = data.id;
-          localStorage.setItem("token", globalStorage.$token);
+          globalProperties.$id = data.id;
+          localStorage.setItem("token", globalProperties.$token);
           console.log("token :");
-          console.log(globalStorage.$token);
+          console.log(globalProperties.$token);
           console.log("id :");
-          console.log(globalStorage.$id);
+          console.log(globalProperties.$id);
         })
         .catch((error) => {
           console.log(error);
