@@ -9,22 +9,16 @@
 
 <script>
 import BookList from "@/components/BookList.vue";
-<<<<<<< Updated upstream
 import { globalProperties } from "../main.js";
-=======
-import { globalStorage } from "../main.js";
->>>>>>> Stashed changes
+
 export default {
   name: "MyLibrary",
   components: { BookList },
   data() {
     return {
       isLoggedIn: false,
-<<<<<<< Updated upstream
       token: globalProperties.$token,
-=======
-      token: globalStorage.$token,
->>>>>>> Stashed changes
+
     };
   },
   beforeMount() {
