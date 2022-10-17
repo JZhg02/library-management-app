@@ -14,6 +14,7 @@
             </div>
             <div class="right">
                 <router-link class="middle-button" to="/login"><p>Log In</p></router-link>
+                <router-link class="middle-button" to="/signin"><p>Sign In</p></router-link>
             </div>
         </div>
     </div>

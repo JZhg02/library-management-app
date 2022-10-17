@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const { Sequelize, connection } = require("./../db.connection");
 const BookTable = require("./../models/book.model")('books', connection, Sequelize);
+// const users = require("./../models/user.model")(connection, Sequelize);
+// const Seq = require("../db.connection");
+const users = require("../models/user.model")(connection, Sequelize);
 
 // Working
 router.post("/post/book", async function (req, res, next) {
@@ -34,6 +37,33 @@ router.get('/books', async function (req, res, next) {
         .catch(e => console.log("Error", e)
         )
 })
+
+//Sign in
+router.post('/signin', async function (req, res, next) {
+    console.log("POST /sigin")
+    console.log(req.body)
+    await maxId('users')
+        .then(maxId => {
+            // Get a new Id
+            newId = maxId + 1
+            console.log("\tnewId: " + newId)
+
+            // Create user
+            users.create({
+                id: (maxId + 1),
+                fullname: req.body.fullname,
+                email: req.body.email,
+                password: req.body.password
+            })
+
+            // Create new BookTable named 'books{newId}'
+            const newBookTable = require("./../models/book.model")('books' + newId, connection, Sequelize)
+            newBookTable.sync()
+            // TODO
+            // .then(newBookTable.create({}))
+        })
+})
+
 
 async function maxId(tableName) {
     const maxId = await connection.query("SELECT MAX(id) FROM " + tableName)

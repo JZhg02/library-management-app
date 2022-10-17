@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import {  globalProperties } from "../main.js";
+import { globalProperties } from "../main.js";
 
 export default {
-  name: "LoginPupup",
+  name: "LoginPopup",
   data() {
     return {
       username: "test@gmail.com",
@@ -83,10 +83,8 @@ export default {
           component.token = data.token;
           globalProperties.$id = data.id;
           localStorage.setItem("token", globalProperties.$token);
-          console.log("token :");
-          console.log(globalProperties.$token);
-          console.log("id :");
-          console.log(globalProperties.$id);
+          console.log("token :" + globalProperties.$token);
+          console.log("id :" + globalProperties.$id);
         })
         .catch((error) => {
           console.log(error);
