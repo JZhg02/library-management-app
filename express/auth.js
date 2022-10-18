@@ -73,7 +73,7 @@ exports.disconnect = async (req, res) => {
 
 
     if(token) {
-        let connectionState = sessions.disconnect(token);
+        let connectionState = sessions.delete(token);
 
         if(Number.isNaN(connectionState)) {
             res.status(500);
@@ -84,5 +84,8 @@ exports.disconnect = async (req, res) => {
         } else {
             res.send("You have been disconnected");
         }
+    } else {
+        res.status(400);
+        res.send("Missing parameters");
     }
 }

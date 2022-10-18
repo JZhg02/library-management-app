@@ -4,68 +4,73 @@ const { v4: uuidv4 } = require('uuid');
 const moment = require('moment');
 const Sequelize = require("../db.connection");
 const Session = require("../models/session.model")(Sequelize.connection, Sequelize.Sequelize);
-
 /* END db initialization */
+
 
 // Create session for user
 exports.create = async (id) => {
-
-    let validity = moment().add(25, 'minutes').format()
     const obj = {
         token: uuidv4(),
-        validUntil: validity,
+        validUntil: moment().add(25, 'minutes').format(),
         userId: id
     };
+    let result = {};
+
 
     // Save in the database
-    var result = {};
     await Session.create(obj)
-        .then(data => {
-            result = data
-        })
+        .then(data => result = data)
         .catch(e => {
-            console.log("error", e)
+            console.log("error", e);
         });
+
     return result;
 };
 
 // Get session by user id
 exports.findByUserId = async (id) => {
-    var condition = id ? { userId: { [Op.eq]: id } } : null;
-    var result = {};
+    let condition = id ? { userId: { [Op.eq]: id } } : null;
+    let result = {};
+
+
     await Session.findOne({ where: condition })
-        .then(data => {
-            result = data
-        })
+        .then(data => result = data)
         .catch(e => {
-            console.log("Error", e)
-        })
-    return result
+            console.log("Error", e);
+        });
+
+    return result;
 };
 
 // Get session by token
 exports.findByToken = async (token) => {
-    var condition = token ? { token: { [Op.eq]: token } } : null;
-    var result = {};
+    let condition = token ? { token: { [Op.eq]: token } } : null;
+    let result = {};
+
+
     await Session.findOne({ where: condition })
-        .then(data => {
-            result = data
-        })
+        .then(data => result = data)
         .catch(e => {
-            console.log("Error", e)
-        })
-    return result
+            console.log("Error", e);
+        });
+
+    return result;
 };
 
 // Delete a token with a certain id
 exports.delete = (token) => {
+    let result;
+
+
     Session.destroy({
         'where': {
             'token': token
         }
     })
-        .then(num => num)
-        .catch(err => err);
+        .then(num => result = num)
+        .catch(err => result = err);
+
+    return result;
 };
 
 // exports.delete = (id) => {
