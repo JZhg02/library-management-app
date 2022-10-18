@@ -35,7 +35,6 @@ exports.login = async (req, res) => {
 
 exports.isLoggedIn = async (req, res) => {
     var token = req.body.token
-    console.log(req.body)
     if (token) {
         let session = await sessions.findByToken(token)
         if (session) {
