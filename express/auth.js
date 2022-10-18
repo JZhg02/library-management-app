@@ -41,7 +41,7 @@ exports.isLoggedIn = async (req, res) => {
             let isTokenExpired = (new Date(session.validUntil) - new Date()) <= 0
             console.log(session.validUntil, isTokenExpired)
             if (session && !isTokenExpired) {
-                console.log("all good!")
+                console.log("all good!, authentification passed")
                 return true
             }
             console.log("token expired!")

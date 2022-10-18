@@ -19,6 +19,10 @@ router.use(async (req, res, next) => {
 })
 
 router.post('/books/:id', async function (req, res, next) {
+  const tableName = "books" + req.params.id
+  const BookTable = require("./../models/book.model")(tableName, connection, Sequelize)
+  await BookTable.sync() 
+
   await BookTable.findAll()
     .then(books => {
       res.header('Content-Type', 'application/json');  // Specify file type
@@ -26,10 +30,6 @@ router.post('/books/:id', async function (req, res, next) {
     })
     .catch(e => console.log("Error", e)
     )
-  console.log('--------------')
-  console.log("id : " + req.params.id)
-  console.log("TODO access table from id")
-  console.log('--------------')
 })
 
 

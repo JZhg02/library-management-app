@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import globalProperties from "../main.js";
+import { globalProperties } from "./../main.js";
 
 export default {
   name: "SignInPopup",

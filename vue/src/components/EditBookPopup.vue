@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-book-popup" >
+  <div class="edit-book-popup">
     <form class="edit-form" id="editForm">
       <div class="edit-input">
         <label for="title">Title: </label>
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { globalProperties } from "./../main.js";
+
 export default {
   name: "EditBookPopup",
   props: {
@@ -54,7 +56,7 @@ export default {
   },
   data() {
     return {
-      action: "api/post/edit/" + this.nameId,
+      // action: "api/post/edit/" + this.nameId,
       modifiedId: this.nameId,
       modifiedTitle: this.title,
       modifiedAuthor: this.author,
@@ -62,7 +64,7 @@ export default {
       modifiedPublishingDate: this.publishingDate,
       modifiedAvailable: this.available,
       modifiedLoaned: this.loaned,
-      modifiedImage: this.image 
+      modifiedImage: this.image,
     };
   },
   methods: {
@@ -75,13 +77,14 @@ export default {
       });
     },
     postData() {
-      console.log(this.action);
-      console.log(this.name);
+      // console.log(this.action);
+      // console.log(this.name);
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            id: this.modifiedId,
+          userId: globalProperties.$id,
+          bookId: this.modifiedId,
           title: this.modifiedTitle,
           author: this.modifiedAuthor,
           publishingHouse: this.modifiedPublishingHouse,
@@ -91,7 +94,7 @@ export default {
           image: this.modifiedImage,
         }),
       };
-      fetch(this.action, requestOptions)
+      fetch("/api/post/edit", requestOptions)
         .then((response) => response.json())
         .then((data) => console.log(data));
       this.closePopup();

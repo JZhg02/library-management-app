@@ -1,34 +1,60 @@
 var express = require('express');
 var router = express.Router();
 const { Sequelize, connection } = require("./../db.connection");
-const BookTable = require("./../models/book.model")('books', connection, Sequelize);
-// const users = require("./../models/user.model")(connection, Sequelize);
-// const Seq = require("../db.connection");
+const bookStoredInExpress = require("./../data/books.json")
 const users = require("../models/user.model")(connection, Sequelize);
+const sessions = require("./../controllers/session.controller");
 
 // Working
 router.post("/post/book", async function (req, res, next) {
     console.log('POST /post/book')
+    const tableName = "books" + req.body.userId
+    const BookTable = require("./../models/book.model")(tableName, connection, Sequelize)
+    await BookTable.sync()
 
-    maxId('books').then(maxId => {
-        req.body.id = maxId + 1
-        BookTable.create(req.body)
-        console.log("\tCreating new book (id: " + (maxId + 1) + ")")
+    maxId(tableName).then(maxId => {
+        req.body.bookId = maxId + 1
+        BookTable.create({
+            id: req.body.bookId,
+            title: req.body.title,
+            author: req.body.author,
+            publishingHouse: req.body.publishingHouse,
+            publishingDate: req.body.publishingDate,
+            available: req.body.available,
+            loaned: req.body.loaned,
+            image: req.body.image,
+        })
+        console.log("Creating new book (id: " + (maxId + 1) + ") in " + tableName)
     }).catch(e => console.log("Error", e))
 })
 
 // Working
-router.post("/post/edit/:id", async function (req, res, next) {
-    console.log('POST /post/edit/:' + req.params.id)
-    await BookTable.update(
-        req.body,
+router.post("/post/edit/", async function (req, res, next) {
+    console.log('POST /post/edit/')
+
+    const tableName = "books" + req.body.userId
+    const BookTable = require("./../models/book.model")(tableName, connection, Sequelize)
+    await BookTable.sync()
+
+    await BookTable.update({
+        id: req.body.bookId,
+        title: req.body.title,
+        author: req.body.author,
+        publishingHouse: req.body.publishingHouse,
+        publishingDate: req.body.publishingDate,
+        available: req.body.available,
+        loaned: req.body.loaned,
+        image: req.body.image,
+    },
         {
-            where: { id: req.params.id }
-        }
-    ).catch(e => console.log("Error", e))
+            where: { id: req.body.bookId }
+        }).catch(e => console.log("Error", e))
+    console.log("Editing book (id: " + req.body.bookId + ") in " + tableName)
 })
 
+// !!! it should not be used anymore
 router.get('/books', async function (req, res, next) {
+    console.log("this function should not be used anymore, find me if u saw me")
     await BookTable.findAll()
         .then(books => {
             res.header('Content-Type', 'application/json');  // Specify file type
@@ -41,29 +67,41 @@ router.get('/books', async function (req, res, next) {
 //Sign in
 router.post('/signin', async function (req, res, next) {
     console.log("POST /sigin")
-    console.log(req.body)
+    var newId;
     await maxId('users')
         .then(maxId => {
             // Get a new Id
             newId = maxId + 1
-            console.log("\tnewId: " + newId)
 
             // Create user
             users.create({
-                id: (maxId + 1),
+                id: newId,
                 fullname: req.body.fullname,
                 email: req.body.email,
                 password: req.body.password
             })
 
-            // Create new BookTable named 'books{newId}'
-            const newBookTable = require("./../models/book.model")('books' + newId, connection, Sequelize)
-            newBookTable.sync()
-            // TODO
-            // .then(newBookTable.create({}))
         })
+
+    // Create new BookTable named 'books{newId}'
+    const newBookTable = require("./../models/book.model")('books' + newId, connection, Sequelize)
+    await newBookTable.sync()
+    console.log("!!! new users, get a standard database of books for now")
+    for (book of bookStoredInExpress) {
+        newBookTable.create(book)
+    }
+
+    var session = await sessions.create(newId)
+    res.send(JSON.stringify({
+        id: newId,
+        token: session.token
+    }))
 })
 
+// router.post("/getNewToken", async function(req, res, next) {
+//     const sessions = require("../controllers/session.controller");
+//     sessions.create(req.body.userId)
+// })
 
 async function maxId(tableName) {
     const maxId = await connection.query("SELECT MAX(id) FROM " + tableName)

@@ -54,4 +54,37 @@ async function isLoggedIn(globalProperties) {
     return data.isLoggedIn
 }
 
-export { getId, isTokenInLocalStorage, isLoggedIn }
+async function isTokenValid(globalProperties) {
+    const response = await fetch("/api/isTokenValid", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: globalProperties.$token })
+    })
+    const data = await response.json()
+    if (data.msg == "token is valid") {
+        return true
+    }
+    else if (data.msg == "token is not valid") {
+        return false
+    }
+}
+
+async function askNewToken(globalProperties) {
+    globalProperties
+    let data;
+    try {
+        const response = await fetch('/api/getNewToken', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({userId: globalProperties})
+        })
+        data = await response.json()
+        return data.token
+   } catch(err) {
+    console.log(err)
+   }
+}
+
+export { getId, isTokenInLocalStorage, isLoggedIn, isTokenValid, askNewToken }

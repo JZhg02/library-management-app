@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { globalProperties } from "./../main.js"
+
 export default {
   name: "AddBookPopup",
   data() {
@@ -67,7 +69,8 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: -1,
+          userId: globalProperties.$id,
+          bookId: -1,
           title: this.title,
           author: this.author,
           publishingHouse: this.publishingHouse,
