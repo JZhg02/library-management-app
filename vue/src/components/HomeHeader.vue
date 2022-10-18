@@ -1,5 +1,6 @@
 <template>
-    <div class="header">
+    <div>
+    <div class="header" v-if="!isLoggedIn">
         <label class="hamburger" for="checkbox_toggle"><img :src="logo" alt="Libreasy Logo"></label>
         <input type="checkbox" id="checkbox_toggle" >
         <div class="menu">
@@ -18,14 +19,21 @@
             </div>
         </div>
     </div>
+    <div class="header" v-else>
+        <div class="after-log-menu">
+            <button class="disconnect-btn">Disconnect</button>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
+import { isLoggedIn } from '../funcs'
 export default {
     name: 'HomeHeader',
     data(){
         return{
-            logo: require('@/assets/logo.png')
+            logo: require('@/assets/logo.png'), isLoggedIn: isLoggedIn
         }
     }
 }
@@ -101,6 +109,32 @@ export default {
             }
         }
 
+        .after-log-menu{
+            padding: 20px 0 20px 0;
+            box-shadow: 0px 0px 25px 0px rgb(0, 0, 0);
+            background: transparent;
+            position: fixed;
+            width: 100%;
+            backdrop-filter: blur(5px);
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99;
+            .disconnect-btn{
+                color: white;
+                background-color: rgba(86, 48, 16);
+                border-radius: 5px;
+                height: 5vh;
+                width: 10vw;
+                cursor: pointer;
+            }
+            .disconnect-btn:hover{
+                color: rgba(86, 48, 16);
+                background-color: white;
+            }
+        }
+
         .hamburger {
             display: none;
             text-align: center;
@@ -158,6 +192,18 @@ export default {
         }
 
         .menu:not(:hover){
+            transition: padding 0.5s, background 0.5s, color 0.5s;
+            padding: 30px 0 30px 0;
+            background: transparent;
+        }
+
+        .after-log-menu:hover{
+            transition: padding 0.5s, background 0.5s, color 0.5s;
+            padding: 35px 0 35px 0;
+            background: #876445;
+        }
+
+        .after-log-menu:not(:hover){
             transition: padding 0.5s, background 0.5s, color 0.5s;
             padding: 30px 0 30px 0;
             background: transparent;
