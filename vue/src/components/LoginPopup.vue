@@ -45,7 +45,6 @@
 
 <script>
 import { globalProperties } from "../main.js";
-
 export default {
   name: "LoginPopup",
   data() {
@@ -84,12 +83,16 @@ export default {
           localStorage.setItem("token", globalProperties.$token);
           console.log("token :" + globalProperties.$token);
           console.log("id :" + globalProperties.$id);
-          this.$router.push({ name: 'library' });
+          this.$router.push({ name: 'library' })
+          this.loading();
         })
         .catch((error) => {
           console.log(error);
           component.isLoggedIn = false;
         });
+    },
+    loading: function(){
+      setTimeout(()=>{window.location.reload()}, 1)
     },
     check: function () {
       var component = this;

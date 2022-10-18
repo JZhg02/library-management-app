@@ -1,6 +1,6 @@
 <template>
     <div>
-    <div class="header" v-if="!isLoggedIn">
+    <div class="header" v-if="isLoggedIn">
         <label class="hamburger" for="checkbox_toggle"><img :src="logo" alt="Libreasy Logo"></label>
         <input type="checkbox" id="checkbox_toggle" >
         <div class="menu">
@@ -14,28 +14,67 @@
                 <router-link class="middle-button" to="/contact"><p>Contact Us</p></router-link>
             </div>
             <div class="right">
-                <router-link class="middle-button" to="/login"><p>Log In</p></router-link>
-                <router-link class="middle-button" to="/signin"><p>Sign In</p></router-link>
+                <button class="disconnect-btn"><p>Disconnect</p></button>
             </div>
         </div>
     </div>
     <div class="header" v-else>
-        <div class="after-log-menu">
-            <button class="disconnect-btn">Disconnect</button>
+        <label class="hamburger" for="checkbox_toggle"><img :src="logo" alt="Libreasy Logo"></label>
+        <input type="checkbox" id="checkbox_toggle" >
+        <div class="menu">
+            <div class="left">
+                <router-link to="/"><img :src="logo" alt="Libreasy Logo"></router-link>
+            </div>
+            <div class="middle">
+                <router-link class="middle-button" to="/"> <p>Home</p> </router-link>
+                <router-link class="middle-button" to="/about"><p>About Us</p></router-link>
+                <router-link class="middle-button" to="/contact"><p>Contact Us</p></router-link>
+            </div>
+            <div class="right">
+                <router-link class="middle-button" to="/login"><p>Log In</p></router-link>
+                <router-link class="middle-button" to="/signin"><p>Sign In</p></router-link>
+            </div>
         </div>
     </div>
 </div>
 </template>
 
 <script>
-import { isLoggedIn } from '../funcs'
+import { globalProperties } from '../main'  
 export default {
     name: 'HomeHeader',
     data(){
         return{
-            logo: require('@/assets/logo.png'), isLoggedIn: isLoggedIn
+            logo: require('@/assets/logo.png'), isLoggedIn: false, token: globalProperties.$token,
         }
-    }
+    },
+    beforeMount() {
+        this.check();
+    },
+    methods: {
+        check: function () {
+        var component = this;
+        let options = {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            token: component.token,
+            }),
+        };
+        fetch("/api/login/check", options)
+            .then((response) => {
+            return response.json();
+            })
+            .then((data) => {
+                component.isLoggedIn = data.isLoggedIn;
+            });
+        },
+    },
+    updated() {
+        this.check();
+    },
 }
 </script>
 
@@ -107,31 +146,24 @@ export default {
                 border-radius: 5px;
                 background-color: rgba(86, 48, 16, 0.5);
             }
-        }
 
-        .after-log-menu{
-            padding: 20px 0 20px 0;
-            box-shadow: 0px 0px 25px 0px rgb(0, 0, 0);
-            background: transparent;
-            position: fixed;
-            width: 100%;
-            backdrop-filter: blur(5px);
-            top: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99;
             .disconnect-btn{
-                color: white;
-                background-color: rgba(86, 48, 16);
+                color: red;
+                background-color: transparent;
+                border: none;
                 border-radius: 5px;
-                height: 5vh;
-                width: 10vw;
                 cursor: pointer;
+                margin-right: 1vw;
+                p{
+                    margin: 0;
+                    padding: 1vh 1vw 1vh 1vw;
+                    font-size: medium;
+                    font-weight: bold;
+                }
             }
             .disconnect-btn:hover{
-                color: rgba(86, 48, 16);
-                background-color: white;
+                color: white;
+                background-color: rgba(250, 29, 0, 0.781);
             }
         }
 

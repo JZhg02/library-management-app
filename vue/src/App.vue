@@ -17,7 +17,7 @@ import { globalProperties } from "./main.js";
 export default {
   name: "App",
   components: { HomeHeader },
-  async mounted() {
+  async beforeMount() {
     // if a token is stored in localstorage, assign it to gloabal variable '$token'
     if (isTokenInLocalStorage(globalProperties)) {
       if (await isTokenValid(globalProperties)) {
