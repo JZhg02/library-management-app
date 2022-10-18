@@ -18,7 +18,7 @@ router.post("/check", async function (req, res) {
 });
 
 router.post("/disconnect", async function (req, res) {
-    auth.disconnect(req.body.token);
+    await auth.disconnect(req, res);
 })
 
 router.post("/getId", async function (req, res) {

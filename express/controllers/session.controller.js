@@ -21,7 +21,8 @@ exports.create = async (id) => {
     await Session.create(obj)
         .then(data => result = data)
         .catch(e => {
-            console.log("error", e);
+            console.log("Error =");
+            console.log(e);
         });
 
     return result;
@@ -36,7 +37,8 @@ exports.findByUserId = async (id) => {
     await Session.findOne({ where: condition })
         .then(data => result = data)
         .catch(e => {
-            console.log("Error", e);
+            console.log("Error =");
+            console.log(e);
         });
 
     return result;
@@ -51,18 +53,19 @@ exports.findByToken = async (token) => {
     await Session.findOne({ where: condition })
         .then(data => result = data)
         .catch(e => {
-            console.log("Error", e);
+            console.log("Error =");
+            console.log(e);
         });
 
     return result;
 };
 
 // Delete a token with a certain id
-exports.delete = (token) => {
+exports.delete = async (token) => {
     let result;
 
 
-    Session.destroy({
+    await Session.destroy({
         'where': {
             'token': token
         }

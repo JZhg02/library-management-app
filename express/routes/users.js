@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 const auth = require("../auth.js");
 const { Sequelize, connection } = require("./../db.connection");
+
+// Not used
 const users = require("../controllers/user.controller.js");
 const BookTable = require("./../models/book.model")('books', connection, Sequelize);
+// Not used
 
 // Login middleware
 router.use(async (req, res, next) => {
@@ -28,8 +31,10 @@ router.post('/books/:id', async function (req, res, next) {
       res.header('Content-Type', 'application/json');  // Specify file type
       res.send(JSON.stringify(books));
     })
-    .catch(e => console.log("Error", e)
-    )
+    .catch(e => {
+      console.log("Error =");
+      console.log(e);
+    });
 })
 
 

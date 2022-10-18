@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
 
         // if there is a session, check if it's expired
         let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true
-        var token = ""
+        let token = ""
 
         // if the session exists and is not expired, go on
         // else, create a session
@@ -46,14 +46,16 @@ exports.login = async (req, res) => {
 }
 
 exports.isLoggedIn = async (req, res) => {
-    var token = req.body.token
+    let token = req.body.token
 
 
     if (token) {
         let session = await sessions.findByToken(token)
+
         if (session) {
             let isTokenExpired = (new Date(session.validUntil) - new Date()) <= 0
             console.log(session.validUntil, isTokenExpired)
+
             if (session && !isTokenExpired) {
                 console.log("all good!, authentification passed")
                 return true
@@ -61,21 +63,21 @@ exports.isLoggedIn = async (req, res) => {
             console.log("token expired!")
             return false
         }
+
         console.log("no session!")
         return false
     }
+
     console.log("no token!")
     return false
 }
 
 exports.disconnect = async (req, res) => {
-    var token = req.body.token;
+    if(req.body.token) {
+        let connectionState = await sessions.delete(req.body.token);
 
 
-    if(token) {
-        let connectionState = sessions.delete(token);
-
-        if(Number.isNaN(connectionState)) {
+        if(Number.isNaN(connectionState) || connectionState == undefined) {
             res.status(500);
             res.send("Couldn't disconnect you from your session");
         } else if(connectionState != 1) {
