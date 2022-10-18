@@ -57,25 +57,37 @@ exports.findByToken = async (token) => {
     return result
 };
 
-// Delete a record with a certain id
-exports.delete = (id) => {
+// Delete a token with a certain id
+exports.delete = (token) => {
     Session.destroy({
-        where: { id: id }
+        'where': {
+            'token': token
+        }
     })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Record was deleted successfully!"
-                });
-            } else {
-                res.send({
-                    message: `Cannot delete record with id=${id}. Maybe record was not found!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Could not delete record with id=" + id
-            });
-        });
+        .then(num => num)
+        .catch(err => err);
 };
+
+// exports.delete = (id) => {
+//     Session.destroy({
+//         where: {
+//             id: id
+//         }
+//     })
+//         .then(num => {
+//             if (num == 1) {
+//                 res.send({
+//                     message: "Record was deleted successfully!"
+//                 });
+//             } else {
+//                 res.send({
+//                     message: `Cannot delete record with id=${id}. Maybe record was not found!`
+//                 });
+//             }
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message: "Could not delete record with id=" + id
+//             });
+//         });
+// };

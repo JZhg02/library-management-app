@@ -6,6 +6,9 @@ const users = require("../models/user.model")(connection, Sequelize);
 const sessions = require("./../controllers/session.controller");
 const bookController = require("./../controllers/book.controller")
 
+users.sync();
+
+
 // Working
 router.post("/post/book", async function (req, res, next) {
     console.log('POST /post/book')
@@ -150,6 +153,5 @@ async function maxId(tableName) {
 //     }
 // })
 
+
 module.exports = router;
-
-

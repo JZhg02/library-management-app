@@ -7,9 +7,7 @@ const User = require("../models/user.model")(Sequelize.connection, Sequelize.Seq
 // Create
 exports.create = (req, res) => {
 
-    console.log(
-        "users.create ==============="
-    )
+    console.log("users.create ===============")
     console.log(req.body)
     // Validate request
     if (!req.body.fullname || !req.body.email || !req.body.phone) {

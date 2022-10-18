@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const users = require("../controllers/user.controller.js")
-const auth = require("../auth.js")
+const auth = require("../auth.js");
 const { Sequelize, connection } = require("./../db.connection");
+const users = require("../controllers/user.controller.js");
 const BookTable = require("./../models/book.model")('books', connection, Sequelize);
 
 // Login middleware
