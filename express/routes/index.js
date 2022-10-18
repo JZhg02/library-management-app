@@ -105,7 +105,10 @@ router.post('/signin', async function (req, res, next) {
 
 async function maxId(tableName) {
     const maxId = await connection.query("SELECT MAX(id) FROM " + tableName)
-    return maxId[0][0]['MAX(id)']
+    var res = maxId[0][0]['MAX(id)']
+    if (res == null)
+        return 1;
+    return res
 }
 
 // Not used
