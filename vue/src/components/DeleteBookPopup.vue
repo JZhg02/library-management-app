@@ -4,13 +4,14 @@
             Are you sure you want to delete this book ? <br>Changes are irreversible.
             <div class="delete-cancel-buttons">
                 <button id="delete-cancel-btn" @click="closePopup">No</button>
-                <button id="delete-btn" @click="closePopup(); postData()">Yes</button>
+                <button id="delete-btn" @click="postData">Yes</button>
             </div>
         </div>
     </div>
   </template>
   
   <script>
+  import { globalProperties } from "./../main.js";
   export default {
     name: "DeleteBookPopup",
     props: {
@@ -20,7 +21,7 @@
         closePopup() {
             var deletePopupMask = document.querySelector(".test-delete");
             deletePopupMask.classList.remove("delete-page-mask");
-            var deletePopup = document.querySelectorAll("#delete-popup");
+            var deletePopup = document.querySelectorAll(".delete-popup");
             deletePopup.forEach((element) => {
                 element.style.visibility = "hidden";
             });
@@ -28,30 +29,17 @@
         // thisBookId is the id of the book for this delete popup
         postData() {
             console.log(this.thisBookId)
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userId: globalProperties.$id,
+                    id: this.thisBookId
+                }),
+            };
+            fetch("api/post/delete", requestOptions)
+            this.closePopup();
         },
-      /*
-      postData() {
-        console.log(this.action);
-        console.log(this.name);
-        const requestOptions = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            id: this.bookId,
-            title: this.bookTitle,
-            author: this.bookAuthor,
-            publishingHouse: this.bookPublishingHouse,
-            publishingDate: this.bookPublishingDate,
-            available: this.bookAvailable,
-            loaned: this.bookLoaned,
-            image: this.bookImage,
-          }),
-        };
-        fetch(this.action, requestOptions)
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-        this.closePopup();
-      },*/
     },
     beforeMount() {
       // console.log(this.action);

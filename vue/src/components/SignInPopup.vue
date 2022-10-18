@@ -1,9 +1,9 @@
 <template>
   <section class="login">
     <form>
-      <div class="innerFrame">
+      <h1>Sign in</h1>
         <div class="field">
-          <label for="fullName">Name</label>
+          <label for="fullName">Full Name</label>
           <input type="text" name="fullName" id="fullName" v-model="fullName" />
         </div>
         <div class="field">
@@ -20,7 +20,6 @@
           />
         </div>
         <button @click="signIn" type="button">Submit</button>
-      </div>
     </form>
   </section>
 </template>
@@ -72,23 +71,52 @@ export default {
 
 <style scoped lang="scss">
 .login {
+  margin-top: 25vh;
+  margin: 0.3em;
   form {
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #E3CAA5;
+    width: fit-content;
     margin: auto;
     text-align: left;
+    border-radius: 15px;
+    padding: 2em;
 
-    .innerFrame {
-      width: 185px;
-      margin: auto;
+    .field{
+      display: flex;
+      flex-direction: column;
+      margin: 0.3em;
+      input{
+        height: 20px;
+        width: 20em;
+        border-radius: 5px;
+        @media screen and (max-width: 600px) {
+          width: 13em;
+        }
+      }
+    }
 
-      label {
-        display: block;
-        color: black;
+    button{
+      margin: 0.5em;
+      width: 6vw;
+      height: 4vh;
+      border-radius: 5px;
+      background-color: antiquewhite;
+
+      @media screen and (max-width: 900px) {
+        width: 12vw;
       }
 
-      input {
-        margin-bottom: 10px;
+      @media screen and (max-width: 600px) {
+        width: 20vw;
       }
+    }
+    button:hover{
+      color: antiquewhite;
+      background-color: #dcb275;
+      border-color: antiquewhite;
     }
   }
 }

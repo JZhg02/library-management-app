@@ -4,6 +4,7 @@ const { Sequelize, connection } = require("./../db.connection");
 const bookStoredInExpress = require("./../data/books.json")
 const users = require("../models/user.model")(connection, Sequelize);
 const sessions = require("./../controllers/session.controller");
+const bookController = require("./../controllers/book.controller")
 
 // Working
 router.post("/post/book", async function (req, res, next) {
@@ -51,6 +52,11 @@ router.post("/post/edit/", async function (req, res, next) {
         }).catch(e => console.log("Error", e))
     console.log("Editing book (id: " + req.body.bookId + ") in " + tableName)
 })
+
+router.post("/post/delete", async function (req, res, next) {
+    bookController.delete(req.body.id, req.body.userId)
+})
+
 
 // !!! it should not be used anymore
 router.get('/books', async function (req, res, next) {

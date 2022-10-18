@@ -1,6 +1,7 @@
 <template>
-    <div></div>
- <LoginPopup></LoginPopup> 
+    <div class="theLogin">
+        <LoginPopup></LoginPopup> 
+    </div>
 </template>
 
 <script>
@@ -12,7 +13,15 @@ export default {
 </script>
 
 <style>
-div {
-    height: 100px;
-}
+.theLogin{
+    margin-top: 15vh;
+    
+    @media screen and (max-width: 1200px) {
+      margin-top: 15vh;
+    }
+
+    @media screen and (max-width: 600px) {
+      margin-top: 8vh;
+    }
+  }
 </style>

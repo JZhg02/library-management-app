@@ -71,7 +71,7 @@ export default {
     closePopup() {
       var editPopupMask = document.querySelector(".test-edit");
       editPopupMask.classList.remove("edit-page-mask");
-      var editPopup = document.querySelectorAll("#edit-popup");
+      var editPopup = document.querySelectorAll(".edit-popup");
       editPopup.forEach((element) => {
         element.style.visibility = "hidden";
       });

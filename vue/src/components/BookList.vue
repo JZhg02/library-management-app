@@ -26,7 +26,8 @@
     </div>
     <div class="test-edit" :name="bookList.id">
       <EditBookPopup
-        id="edit-popup"
+        :id="book.id"
+        class="edit-popup"
         v-for="book in bookList"
         :nameId="book.id"
         :key="book.id"
@@ -40,7 +41,7 @@
       ></EditBookPopup>
     </div>
     <div class="test-delete" :name="bookList.id">
-      <DeleteBookPopup v-for="book in bookList" :key="book.id" id="delete-popup" :thisBookId="book.id"></DeleteBookPopup>
+      <DeleteBookPopup v-for="book in bookList" :key="book.id" class="delete-popup" :thisBookId="book.id" :id="book.id"></DeleteBookPopup>
     </div>
   </div>
 </template>
@@ -126,7 +127,7 @@ export default {
   bottom: 0;
   left: 0;
 }
-#edit-popup {
+.edit-popup {
   visibility: hidden;
 }
 .delete-page-mask {
@@ -137,7 +138,7 @@ export default {
   bottom: 0;
   left: 0;
 }
-#delete-popup {
+.delete-popup {
   visibility: hidden;
 }
 

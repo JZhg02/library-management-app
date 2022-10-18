@@ -88,18 +88,13 @@ export default {
             }
 
             .right{
+                display: flex;
                 width: fit-content;
                 height: fit-content;
                 margin-right: 1vw;
             }
 
             .middle-button:hover{
-                color: white;
-                border-radius: 5px;
-                background-color: rgba(86, 48, 16, 0.5);
-            }
-
-            .right:hover{
                 color: white;
                 border-radius: 5px;
                 background-color: rgba(86, 48, 16, 0.5);

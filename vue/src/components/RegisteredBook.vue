@@ -40,7 +40,7 @@ export default {
         editBook(){
             var editPopupMask = document.querySelector(".test-edit")
             editPopupMask.classList.add('edit-page-mask')
-            var editPopup = document.querySelectorAll("#edit-popup")
+            var editPopup = document.querySelectorAll(".edit-popup")
             editPopup.forEach(element => {
                 if(this.nameId == Array.prototype.indexOf.call(editPopup, element)+1){
                     element.style.visibility = "visible"
@@ -50,9 +50,9 @@ export default {
         deleteBook(){
             var deletePopupMask = document.querySelector(".test-delete")
             deletePopupMask.classList.add('delete-page-mask')
-            var deletePopup = document.querySelectorAll("#delete-popup")
+            var deletePopup = document.querySelectorAll(".delete-popup")
             deletePopup.forEach(element => {
-                if(this.nameId == Array.prototype.indexOf.call(deletePopup, element)+1){
+                if(this.nameId == element.getAttribute('id')){
                     element.style.visibility = "visible"
                 }
             })
