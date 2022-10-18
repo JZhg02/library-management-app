@@ -44,7 +44,6 @@ export default {
   props: {
     book: Object,
   },
-  
   methods: {
     editBook() {
       var editPopupMask = document.querySelector(".test-edit");

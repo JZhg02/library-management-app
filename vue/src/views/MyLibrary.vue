@@ -1,5 +1,6 @@
 <template>
   <div v-if="isLoggedIn" class="library">
+    <input class="search-bar" type="text" />
     <BookList></BookList>
   </div>
 

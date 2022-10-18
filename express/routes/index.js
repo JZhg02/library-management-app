@@ -6,6 +6,9 @@ const users = require("../models/user.model")(connection, Sequelize);
 const sessions = require("./../controllers/session.controller");
 const bookController = require("./../controllers/book.controller")
 
+users.sync();
+
+
 // Working
 // router.post("/post/book", async function (req, res, next) {
 //     console.log('POST /post/book')
@@ -53,7 +56,6 @@ const bookController = require("./../controllers/book.controller")
 //     console.log("Editing book (id: " + req.body.bookId + ") in " + tableName)
 // })
 
-
 // router.post("/post/delete", async function (req, res, next) {
 //     bookController.delete(req.body.id, req.body.userId)
 // })
@@ -74,6 +76,8 @@ const bookController = require("./../controllers/book.controller")
 router.post('/signin', async function (req, res, next) {
     console.log("POST /sigin")
     var newId;
+
+
     await maxId('users')
         .then(maxId => {
             // Get a new Id
@@ -87,11 +91,12 @@ router.post('/signin', async function (req, res, next) {
                 password: req.body.password
             })
 
-        })
+        });
 
     // Create new BookTable named 'books{newId}'
     const newBookTable = require("./../models/book.model")('books' + newId, connection, Sequelize)
     await newBookTable.sync()
+
     console.log("!!! new users, get a standard database of books for now")
     for (book of bookStoredInExpress) {
         newBookTable.create(book)
@@ -101,12 +106,14 @@ router.post('/signin', async function (req, res, next) {
     res.send(JSON.stringify({
         id: newId,
         token: session.token
-    }))
+    }));
 })
 
 router.post('/isTokenValid', async function (req, res, next) {
     console.log("POST /isTokenValid")
     const sessions = require("../controllers/session.controller");
+
+
     sessions.findByToken(req.body.token)
         .then(ses => {
             if (ses != null)
@@ -114,7 +121,7 @@ router.post('/isTokenValid', async function (req, res, next) {
             else {
                 res.send(JSON.stringify({ msg: "token is not valid" }))
             }
-        })
+        });
 })
 
 // router.post("/getNewToken", async function(req, res, next) {
@@ -126,9 +133,11 @@ router.post('/isTokenValid', async function (req, res, next) {
 async function maxId(tableName) {
     const maxId = await connection.query("SELECT MAX(id) FROM " + tableName)
     var res = maxId[0][0]['MAX(id)']
+
+    
     if (res == null)
         return 1;
-    return res
+    return res;
 }
 
 
@@ -152,6 +161,5 @@ async function maxId(tableName) {
 //     }
 // })
 
+
 module.exports = router;
-
-

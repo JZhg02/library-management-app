@@ -7,11 +7,8 @@ User.sync()
 
 // Create
 exports.create = (req, res) => {
+    console.log("users.create ===============")
 
-    console.log(
-        "users.create ==============="
-    )
-    
     // Validate request
     if (!req.body.fullname || !req.body.email || !req.body.phone) {
         res.status(400).send({

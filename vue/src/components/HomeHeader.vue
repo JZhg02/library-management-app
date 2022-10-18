@@ -1,6 +1,7 @@
 <template>
     <div>
     <div class="header" v-if="isLoggedIn">
+
         <label class="hamburger" for="checkbox_toggle"><img :src="logo" alt="Libreasy Logo"></label>
         <input type="checkbox" id="checkbox_toggle" >
         <div class="menu">
@@ -14,7 +15,7 @@
                 <router-link class="middle-button" to="/contact"><p>Contact Us</p></router-link>
             </div>
             <div class="right">
-                <button class="disconnect-btn"><p>Disconnect</p></button>
+                <button class="disconnect-btn" @click="$emit('disconnect')><p>Disconnect</p></button>
             </div>
         </div>
     </div>
@@ -40,7 +41,10 @@
 </template>
 
 <script>
+import { isLoggedIn } from '../funcs'
 import { globalProperties } from '../main'  
+
+
 export default {
     name: 'HomeHeader',
     data(){
@@ -164,6 +168,32 @@ export default {
             .disconnect-btn:hover{
                 color: white;
                 background-color: rgba(250, 29, 0, 0.781);
+            }
+        }
+
+        .after-log-menu{
+            padding: 20px 0 20px 0;
+            box-shadow: 0px 0px 25px 0px rgb(0, 0, 0);
+            background: transparent;
+            position: fixed;
+            width: 100%;
+            backdrop-filter: blur(5px);
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99;
+            .disconnect-btn{
+                color: white;
+                background-color: rgba(86, 48, 16);
+                border-radius: 5px;
+                height: 5vh;
+                width: 10vw;
+                cursor: pointer;
+            }
+            .disconnect-btn:hover{
+                color: rgba(86, 48, 16);
+                background-color: white;
             }
         }
 

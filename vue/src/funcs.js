@@ -37,6 +37,12 @@ function isTokenInLocalStorage(globalProperties) {
 // check if logged in
 async function isLoggedIn(globalProperties) {
     let data;
+
+
+    if(!(await isTokenInLocalStorage(globalProperties))) {
+        return false;
+    }
+
     try {
         const response = await fetch("/api/login/check", {
             method: "POST",
@@ -76,7 +82,7 @@ async function askNewToken(globalProperties) {
         const response = await fetch('/api/getNewToken', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({userId: globalProperties})
         })
@@ -87,4 +93,5 @@ async function askNewToken(globalProperties) {
    }
 }
 
-export { getId, isTokenInLocalStorage, isLoggedIn, isTokenValid, askNewToken }
+
+export { getId, isTokenInLocalStorage, isLoggedIn, isTokenValid, askNewToken}

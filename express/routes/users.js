@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const users = require("../controllers/user.controller.js")
-const auth = require("../auth.js")
+const auth = require("../auth.js");
 const { Sequelize, connection } = require("./../db.connection");
 const bookController = require("./../controllers/book.controller")
+
 
 // Login middleware
 router.use(async (req, res, next) => {
@@ -63,5 +63,6 @@ router.post('/books/:id', async function (req, res, next) {
   var json = await bookController.get(req.params.id)
   res.send(json)
 })
+
 
 module.exports = router;

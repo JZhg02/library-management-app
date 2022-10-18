@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeHeader></HomeHeader>
+    <HomeHeader @disconnect="disconnect"></HomeHeader>
     <router-view />
   </div>
 </template>
@@ -14,9 +14,30 @@ import {
   isTokenValid,
 } from "./funcs";
 import { globalProperties } from "./main.js";
+
+
 export default {
   name: "App",
   components: { HomeHeader },
+  methods: {
+    disconnect: async function () {
+      let self = this;
+
+
+      if(await isLoggedIn(globalProperties) && await isTokenInLocalStorage(globalProperties)) {
+        await fetch('/api/login/disconnect', {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({token: globalProperties.$token})
+        })
+        .then(() => {
+          self.$router.push("/login");
+        })
+      }
+    }
+  },
   async beforeMount() {
     // if a token is stored in localstorage, assign it to gloabal variable '$token'
     if (isTokenInLocalStorage(globalProperties)) {
