@@ -107,10 +107,10 @@ export default {
   height: 3vh;
   border-radius: 5px;
   @media screen and (max-width: 900px) {
-    width: 50vw;
+    width: 55vw;
   }
   @media screen and (max-width: 600px) {
-    width: 60vw;
+    width: 70vw;
   }
 }
 .myList {

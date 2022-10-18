@@ -10,7 +10,7 @@
             </div>
             <div class="middle">
                 <router-link class="middle-button" to="/"> <p>Home</p> </router-link>
-                <router-link class="middle-button" to="/library"><p>Services</p></router-link>
+                <router-link class="middle-button" to="/library"><p>My Library</p></router-link>
                 <router-link class="middle-button" to="/about"><p>About Us</p></router-link>
                 <router-link class="middle-button" to="/contact"><p>Contact Us</p></router-link>
             </div>

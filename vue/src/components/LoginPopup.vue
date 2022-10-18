@@ -24,7 +24,7 @@
           <button @click="login" type="button">Submit</button>
       </form>
     </section>
-
+<!--
     <div class="separator"></div>
 
     <section class="test">
@@ -39,7 +39,7 @@
         </tr>
       </table>
       <button @click="check">Update</button>
-    </section>
+    </section>-->
   </div>
 </template>
 

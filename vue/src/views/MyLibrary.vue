@@ -48,16 +48,11 @@ export default {
 
 <style lang="scss">
 .library {
-  margin-top: 15vh;
+  margin-top: 18vh;
 
   @media screen and (max-width: 600px) {
     margin-top: 10vh;
   }
-}
-.search-bar {
-  width: 30vw;
-  height: 3vh;
-  border-radius: 5px;
 }
 .notLoggedIn {
   margin-top: 300px;

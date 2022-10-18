@@ -8,11 +8,6 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/services',
-    name: 'services',
-    component: () => import('../views/OurServices.vue')
-  },
-  {
     path: '/about',
     name: 'about',
     component: () => import('../views/AboutUs.vue')
@@ -26,11 +21,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('../views/LogIn.vue')
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('../views/RegisterIn.vue')
   },
   {
     path: '/library',
