@@ -1,7 +1,9 @@
 <template>
   <div v-if="isLoggedIn" class="library">
+    <input class="search-bar" type="text" />
     <BookList></BookList>
   </div>
+
   <div class="notLoggedIn" v-else>Not logged in</div>
 </template>
 
@@ -46,6 +48,18 @@ export default {
 </script>
 
 <style lang="scss">
+.library {
+  margin-top: 15vh;
+
+  @media screen and (max-width: 600px) {
+    margin-top: 10vh;
+  }
+}
+.search-bar {
+  width: 30vw;
+  height: 3vh;
+  border-radius: 5px;
+}
 .notLoggedIn {
   margin-top: 300px;
   background-color: red;

@@ -32,6 +32,7 @@ export default {
       alert("Please log in (token expired)");
       this.$router.push("/login");
     }
+
   },
 };
 </script>

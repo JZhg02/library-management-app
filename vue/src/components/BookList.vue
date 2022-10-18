@@ -1,19 +1,12 @@
 <template>
   <div class="library">
-    <input class="search-bar" type="text" v-model="search">
+    <input class="search-bar" type="text" v-model="search" />
     <div class="myList">
       <button id="book-button" @click="addBook()"><h1>+</h1></button>
       <RegisteredBook
         v-for="book in filteredBooks"
-        :nameId="book.id"
         :key="book.id"
-        :imagePath="book.image"
-        :title="book.title"
-        :author="book.author"
-        :house="book.publishingHouse"
-        :date="book.publishingDate"
-        :available="book.available"
-        :loaned="book.loaned"
+        :book="book"
       ></RegisteredBook>
       <!--
           <div class="page-mask" :name=bookList.id>
@@ -28,22 +21,20 @@
       </div>
       <div class="test-edit" :name="bookList.id">
         <EditBookPopup
-          :id="book.id"
           class="edit-popup"
           v-for="book in bookList"
-          :nameId="book.id"
+          :book="book"
           :key="book.id"
-          :image="book.image"
-          :title="book.title"
-          :author="book.author"
-          :publishingHouse="book.publishingHouse"
-          :publishingDate="book.publishingDate"
-          :available="book.available"
-          :loaned="book.loaned"
         ></EditBookPopup>
       </div>
       <div class="test-delete" :name="bookList.id">
-        <DeleteBookPopup v-for="book in bookList" :key="book.id" class="delete-popup" :thisBookId="book.id" :id="book.id"></DeleteBookPopup>
+        <DeleteBookPopup
+          v-for="book in bookList"
+          :key="book.id"
+          class="delete-popup"
+          :thisBookId="book.id"
+          :id="book.id"
+        ></DeleteBookPopup>
       </div>
     </div>
   </div>
@@ -53,7 +44,7 @@
 import RegisteredBook from "@/components/RegisteredBook.vue";
 import AddBookPopup from "@/components/AddBookPopup.vue";
 import EditBookPopup from "@/components/EditBookPopup.vue";
-import DeleteBookPopup from "@/components/DeleteBookPopup.vue"
+import DeleteBookPopup from "@/components/DeleteBookPopup.vue";
 import { globalProperties } from "@/main";
 
 export default {
@@ -71,7 +62,7 @@ export default {
       addPopupMask.classList.add("add-page-mask");
       var addPopup = document.querySelector("#add-popup");
       addPopup.style.visibility = "visible";
-    }
+    },
   },
   beforeMount() {
     var component = this;
@@ -89,12 +80,15 @@ export default {
       });
   },
   computed: {
-    filteredBooks(){
-      return this.bookList.filter(book => book.title.toLowerCase().includes(this.search) 
-      || book.author.toLowerCase().includes(this.search)
-      || book.publishingHouse.toLowerCase().includes(this.search)
-      )}
-  }
+    filteredBooks() {
+      return this.bookList.filter(
+        (book) =>
+          book.title.toLowerCase().includes(this.search) ||
+          book.author.toLowerCase().includes(this.search) ||
+          book.publishingHouse.toLowerCase().includes(this.search)
+      );
+    },
+  },
 };
 </script>
 

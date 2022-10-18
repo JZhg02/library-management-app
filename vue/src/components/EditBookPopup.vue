@@ -45,26 +45,18 @@ import { globalProperties } from "./../main.js";
 export default {
   name: "EditBookPopup",
   props: {
-    nameId: Number,
-    title: String,
-    author: String,
-    publishingHouse: String,
-    publishingDate: String,
-    available: Number,
-    loaned: Number,
-    image: String,
+    book: Object,
   },
   data() {
     return {
-      // action: "api/post/edit/" + this.nameId,
-      modifiedId: this.nameId,
-      modifiedTitle: this.title,
-      modifiedAuthor: this.author,
-      modifiedPublishingHouse: this.publishingHouse,
-      modifiedPublishingDate: this.publishingDate,
-      modifiedAvailable: this.available,
-      modifiedLoaned: this.loaned,
-      modifiedImage: this.image,
+      modifiedId: this.book.id,
+      modifiedTitle: this.book.title,
+      modifiedAuthor: this.book.author,
+      modifiedPublishingHouse: this.book.publishingHouse,
+      modifiedPublishingDate: this.book.publishingDate,
+      modifiedAvailable: this.book.available,
+      modifiedLoaned: this.book.loaned,
+      modifiedImage: this.book.image,
     };
   },
   methods: {
@@ -94,7 +86,7 @@ export default {
           image: this.modifiedImage,
         }),
       };
-      fetch("/api/post/edit", requestOptions)
+      fetch("/api/users/post/edit", requestOptions)
         .then((response) => response.json())
         .then((data) => console.log(data));
       this.closePopup();

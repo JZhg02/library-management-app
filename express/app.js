@@ -49,9 +49,9 @@ app.use(function (err, req, res, next) {
 
 
 // Create tables
-const User = require("./models/user.model")(connection, Sequelize,);
+const User = require("./models/user.model")(connection, Sequelize);
 const Session = require("./models/session.model")(connection, Sequelize);
-
+const Book = require("./models/book.model")(connection, Sequelize);
 
 // Prevent DeadLock (Session is link to User)
 User.sync({ force: false, alter: true })

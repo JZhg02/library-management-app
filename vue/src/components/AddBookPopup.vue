@@ -1,5 +1,5 @@
 <template>
-  <div class="add-book-popup" >
+  <div class="add-book-popup">
     <form class="add-form" id="addForm">
       <div class="add-input">
         <label for="title">Title: </label>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { globalProperties } from "./../main.js"
+import { globalProperties } from "./../main.js";
 
 export default {
   name: "AddBookPopup",
@@ -69,6 +69,7 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          token: globalProperties.$token,
           userId: globalProperties.$id,
           bookId: -1,
           title: this.title,
@@ -80,7 +81,7 @@ export default {
           image: this.image,
         }),
       };
-      fetch("api/post/book", requestOptions)
+      fetch("api/users/post/book", requestOptions);
       this.closePopup();
     },
   },

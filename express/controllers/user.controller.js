@@ -2,6 +2,7 @@
 const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
 const User = require("../models/user.model")(Sequelize.connection, Sequelize.Sequelize);
+User.sync()
 /* END db initialization */
 
 // Create
@@ -10,7 +11,7 @@ exports.create = (req, res) => {
     console.log(
         "users.create ==============="
     )
-    console.log(req.body)
+    
     // Validate request
     if (!req.body.fullname || !req.body.email || !req.body.phone) {
         res.status(400).send({
