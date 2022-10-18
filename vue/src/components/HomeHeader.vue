@@ -15,7 +15,7 @@
                 <router-link class="middle-button" to="/contact"><p>Contact Us</p></router-link>
             </div>
             <div class="right">
-                <button class="disconnect-btn" @click="$emit('disconnect')><p>Disconnect</p></button>
+                <button class="disconnect-btn" @click="$emit('disconnect')"><p>Disconnect</p></button>
             </div>
         </div>
     </div>
