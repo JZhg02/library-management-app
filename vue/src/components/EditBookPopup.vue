@@ -75,6 +75,7 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          token: globalProperties.$token,
           userId: globalProperties.$id,
           bookId: this.modifiedId,
           title: this.modifiedTitle,
