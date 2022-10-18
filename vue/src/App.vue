@@ -38,8 +38,8 @@ export default {
       }
     }
   },
-  async mounted() {
-    // if a token is stored in localstorage, assign it to global variable '$token'
+  async beforeMount() {
+    // if a token is stored in localstorage, assign it to gloabal variable '$token'
     if (isTokenInLocalStorage(globalProperties)) {
       if (await isTokenValid(globalProperties)) {
         // Get Id based on token

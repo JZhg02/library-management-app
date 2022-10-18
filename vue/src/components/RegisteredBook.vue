@@ -1,6 +1,6 @@
 <template>
   <div class="book-card" :id="book.id">
-    <img :src="path" alt="Book cover" />
+    <img :src="book.image" alt="Book cover" />
     <div id="info">
       <div id="book-text-info">
         <b class="yellow-title"
@@ -43,11 +43,6 @@ export default {
   name: "RegisteredBook",
   props: {
     book: Object,
-  },
-  data() {
-    return {
-      path: "api/" + this.book.image,
-    };
   },
   methods: {
     editBook() {

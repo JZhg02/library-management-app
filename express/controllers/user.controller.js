@@ -7,7 +7,6 @@ User.sync()
 
 // Create
 exports.create = (req, res) => {
-
     console.log("users.create ===============")
 
     // Validate request

@@ -10,80 +10,67 @@ users.sync();
 
 
 // Working
-router.post("/post/book", async function (req, res, next) {
-    console.log('POST /post/book')
-    const tableName = "books" + req.body.userId
-    const BookTable = require("./../models/book.model")(tableName, connection, Sequelize)
-    await BookTable.sync()
+// router.post("/post/book", async function (req, res, next) {
+//     console.log('POST /post/book')
+//     const tableName = "books" + req.body.userId
+//     const BookTable = require("./../models/book.model")(tableName, connection, Sequelize)
+//     await BookTable.sync()
 
-    maxId(tableName).then(maxId => {
-        req.body.bookId = maxId + 1
-        BookTable.create({
-            id: req.body.bookId,
-            title: req.body.title,
-            author: req.body.author,
-            publishingHouse: req.body.publishingHouse,
-            publishingDate: req.body.publishingDate,
-            available: req.body.available,
-            loaned: req.body.loaned,
-            image: req.body.image,
-        })
-        console.log("Creating new book (id: " + (maxId + 1) + ") in " + tableName)
-    })
-        .catch(e => {
-            console.log("Error =");
-            console.log(e);
-        });
-})
+//     maxId(tableName).then(maxId => {
+//         req.body.bookId = maxId + 1
+//         BookTable.create({
+//             id: req.body.bookId,
+//             title: req.body.title,
+//             author: req.body.author,
+//             publishingHouse: req.body.publishingHouse,
+//             publishingDate: req.body.publishingDate,
+//             available: req.body.available,
+//             loaned: req.body.loaned,
+//             image: req.body.image,
+//         })
+//         console.log("Creating new book (id: " + (maxId + 1) + ") in " + tableName)
+//     }).catch(e => console.log("Error", e))
+// })
 
 // Working
-router.post("/post/edit/", async function (req, res, next) {
-    console.log('POST /post/edit/')
+// router.post("/post/edit/", async function (req, res, next) {
+//     console.log('POST /post/edit/')
 
-    const tableName = "books" + req.body.userId
-    const BookTable = require("./../models/book.model")(tableName, connection, Sequelize)
-    await BookTable.sync()
+//     const tableName = "books" + req.body.userId
+//     const BookTable = require("./../models/book.model")(tableName, connection, Sequelize)
+//     await BookTable.sync()
 
-    await BookTable.update({
-        id: req.body.bookId,
-        title: req.body.title,
-        author: req.body.author,
-        publishingHouse: req.body.publishingHouse,
-        publishingDate: req.body.publishingDate,
-        available: req.body.available,
-        loaned: req.body.loaned,
-        image: req.body.image
-    },
-    {
-        where: { id: req.body.bookId }
-    })
-        .catch(e => {
-            console.log("Error =");
-            console.log(e);
-        })
+//     await BookTable.update({
+//         id: req.body.bookId,
+//         title: req.body.title,
+//         author: req.body.author,
+//         publishingHouse: req.body.publishingHouse,
+//         publishingDate: req.body.publishingDate,
+//         available: req.body.available,
+//         loaned: req.body.loaned,
+//         image: req.body.image,
+//     },
+//         {
+//             where: { id: req.body.bookId }
+//         }).catch(e => console.log("Error", e))
+//     console.log("Editing book (id: " + req.body.bookId + ") in " + tableName)
+// })
 
-    console.log("Editing book (id: " + req.body.bookId + ") in " + tableName);
-})
-
-router.post("/post/delete", async function (req, res, next) {
-    bookController.delete(req.body.id, req.body.userId)
-})
-
+// router.post("/post/delete", async function (req, res, next) {
+//     bookController.delete(req.body.id, req.body.userId)
+// })
 
 // !!! it should not be used anymore
-router.get('/books', async function (req, res, next) {
-    console.log("this function should not be used anymore, find me if u saw me")
-
-    await BookTable.findAll()
-        .then(books => {
-            res.header('Content-Type', 'application/json');  // Specify file type
-            res.send(JSON.stringify(books));
-        })
-        .catch(e => {
-            console.log("Error =");
-            console.log(e);
-        });
-})
+// router.get('/books', async function (req, res, next) {
+//     console.log("this function should not be used anymore, find me if u saw me")
+//     await BookTable.findAll()
+//         .then(books => {
+//             res.header('Content-Type', 'application/json');  // Specify file type
+//             res.send(JSON.stringify(books));
+//         })
+//         .catch(e => console.log("Error", e)
+//         )
+// })
 
 //Sign in
 router.post('/signin', async function (req, res, next) {
@@ -142,6 +129,7 @@ router.post('/isTokenValid', async function (req, res, next) {
 //     sessions.create(req.body.userId)
 // })
 
+
 async function maxId(tableName) {
     const maxId = await connection.query("SELECT MAX(id) FROM " + tableName)
     var res = maxId[0][0]['MAX(id)']
@@ -151,6 +139,7 @@ async function maxId(tableName) {
         return 1;
     return res;
 }
+
 
 // Not used
 // router.get('/book/:id', function (req, res, next) {

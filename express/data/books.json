@@ -7,7 +7,7 @@
         "publishingDate": "01/25/2019",
         "available": 3,
         "loaned": 1,
-        "image": "images/Grokking_Deep_Learning.jpg",
+        "image": "https://images.manning.com/book/1/831bea7-12bc-4438-91fa-b3af12e50b00/Trask_GDL_hires.png",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -19,7 +19,7 @@
         "publishingDate": "06/11/2008",
         "available": 3,
         "loaned": 8,
-        "image": "images/Harry_Potter_The_Prequel.jpg",
+        "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1456894457l/8933944.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -31,7 +31,7 @@
         "publishingDate": "07/02/1998",
         "available": 40,
         "loaned": 4,
-        "image": "images/Harry_Potter_and_the_Chamber_of_Secrets.jpg"
+        "image": "https://m.media-amazon.com/images/I/510CXXt9CqL.jpg"
     },
     {
         "id": 4,
@@ -41,7 +41,7 @@
         "publishingDate": "06/26/1997",
         "available": 6,
         "loaned": 2,
-        "image": "images/Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.jpg",
+        "image": "https://m.media-amazon.com/images/I/81YOuOGFCJL.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -53,7 +53,7 @@
         "publishingDate": "07/08/1999",
         "available": 3,
         "loaned": 2,
-        "image": "images/Harry_Potter_and_the_Prisoner_of_Azkaban.jpg",
+        "image": "https://m.media-amazon.com/images/I/81f7bXC-tTL.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -65,7 +65,7 @@
         "publishingDate": "02/02/1922",
         "available": 4,
         "loaned": 5,
-        "image": "images/Ulysses.jpg",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/ab/JoyceUlysses2.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -77,7 +77,7 @@
         "publishingDate": "01/01/1620",
         "available": 3,
         "loaned": 9,
-        "image": "images/Don_Quixote.jpg",
+        "image": "https://kbimages1-a.akamaihd.net/b2ece927-6fe1-40fd-8ee2-681e9c3fe4c3/353/569/90/False/don-quixote-101.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -89,7 +89,7 @@
         "publishingDate": "05/10/1925",
         "available": 5,
         "loaned": 8,
-        "image": "images/The_Great_Gatsby.jpg",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/7a/The_Great_Gatsby_Cover_1925_Retouched.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -101,7 +101,7 @@
         "publishingDate": "01/01/1958",
         "available": 3,
         "loaned": 2,
-        "image": "images/Things_Fall_Apart.jpg",
+        "image": "https://m.media-amazon.com/images/I/81vlAVbRl3L.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -113,7 +113,7 @@
         "publishingDate": "01/01/1836",
         "available": 1,
         "loaned": 0,
-        "image": "images/Fairy_tales.jpg",
+        "image": "https://m.media-amazon.com/images/I/51CARXQDTVL.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -125,7 +125,7 @@
         "publishingDate": "01/01/1315",
         "available": 7,
         "loaned": 5,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://kbimages1-a.akamaihd.net/6e5d9a87-148d-4846-aecb-061f0a0bcf14/353/569/90/False/the-divine-comedy-51.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -137,7 +137,7 @@
         "publishingDate": "01/01/-1700",
         "available": 10,
         "loaned": 0,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://kbimages1-a.akamaihd.net/ee5d3458-137f-4e3f-8c83-3d18758670fa/353/569/90/False/the-epic-of-gilgamesh-14.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -149,7 +149,7 @@
         "publishingDate": "01/01/-600",
         "available": 4,
         "loaned": 22,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://kbimages1-a.akamaihd.net/945b5eae-7768-4957-b36a-95f23dc5a86f/1200/1200/False/the-book-of-job-49.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -161,7 +161,7 @@
         "publishingDate": "01/01/1200",
         "available": 9,
         "loaned": 400,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1394333467l/12390896.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -173,7 +173,7 @@
         "publishingDate": "01/01/1350",
         "available": 5,
         "loaned": 80,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/51ZESz7FUkL._SY498_BO1,204,203,200_.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -185,7 +185,7 @@
         "publishingDate": "01/01/1813",
         "available": 100,
         "loaned": 2,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://m.media-amazon.com/images/I/71Q1tPupKjL.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -197,7 +197,7 @@
         "publishingDate": "01/01/1835",
         "available": 8,
         "loaned": 21,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1389768126l/59145.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -209,7 +209,7 @@
         "publishingDate": "01/01/1952",
         "available": 39,
         "loaned": 5,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://www.rob-tomlinson.com/files/a-good-read/samuell-beckett-molloy-malone-dies-the-unnamable.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -221,7 +221,7 @@
         "publishingDate": "01/01/1351",
         "available": 53,
         "loaned": 82,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://images.booksense.com/images/235/462/9781726462235.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -233,7 +233,7 @@
         "publishingDate": "01/01/1965",
         "available": 34,
         "loaned": 23,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://covers.openlibrary.org/b/id/10832293-L.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -245,7 +245,7 @@
         "publishingDate": "01/01/1847",
         "available": 3,
         "loaned": 2,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://kbimages1-a.akamaihd.net/cf9e6071-e6e1-412f-8aa4-4be13abecbca/1200/1200/False/wuthering-heights-232.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     },
@@ -257,7 +257,7 @@
         "publishingDate": "01/01/1942",
         "available": 3,
         "loaned": 2,
-        "image": "images/The_Divine_Comedy.jpg",
+        "image": "https://m.media-amazon.com/images/I/8130inT26AL.jpg",
         "createdAt": "2022-10-14T04:23:35.000Z",
         "updatedAt": "2022-10-14T04:23:35.000Z"
     }
