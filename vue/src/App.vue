@@ -33,6 +33,7 @@ export default {
           body: JSON.stringify({token: globalProperties.$token})
         })
         .then(() => {
+          globalProperties.$token = "";
           self.$router.push("/login");
         })
       }
