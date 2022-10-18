@@ -98,6 +98,19 @@ router.post('/signin', async function (req, res, next) {
     }))
 })
 
+router.post('/isTokenValid', async function (req, res, next) {
+    console.log("POST /isTokenValid")
+    const sessions = require("../controllers/session.controller");
+    sessions.findByToken(req.body.token)
+        .then(ses => {
+            if (ses != null)
+                res.send(JSON.stringify({ msg: "token is valid" }))
+            else {
+                res.send(JSON.stringify({ msg: "token is not valid" }))
+            }
+        })
+})
+
 // router.post("/getNewToken", async function(req, res, next) {
 //     const sessions = require("../controllers/session.controller");
 //     sessions.create(req.body.userId)
