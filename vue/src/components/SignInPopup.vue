@@ -63,7 +63,14 @@ export default {
           localStorage.setItem("token", globalProperties.$token);
           console.log("token :" + globalProperties.$token);
           console.log("id :" + globalProperties.$id);
+
+          this.$router.push({ name: 'library' })
+          this.loading();
         });
+
+    },
+    loading: function(){
+      setTimeout(()=>{window.location.reload()}, 500)
     },
   },
 };

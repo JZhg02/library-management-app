@@ -90,10 +90,11 @@ export default {
         .catch((error) => {
           console.log(error);
           component.isLoggedIn = false;
+          alert("Wrong email or password. Please try again with the right identifiers.")
         });
     },
     loading: function(){
-      setTimeout(()=>{window.location.reload()}, 1)
+      setTimeout(()=>{window.location.reload()}, 500)
     },
     check: function () {
       var component = this;
