@@ -2,6 +2,7 @@
 const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
 const User = require("../models/user.model")(Sequelize.connection, Sequelize.Sequelize);
+User.sync()
 /* END db initialization */
 
 // Create
