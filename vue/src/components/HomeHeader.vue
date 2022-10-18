@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { isLoggedIn } from '../funcs'
 import { globalProperties } from '../main'  
 
 
