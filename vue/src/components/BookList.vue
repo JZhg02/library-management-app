@@ -1,47 +1,50 @@
 <template>
-  <div class="myList">
-    <button id="book-button" @click="addBook()"><h1>+</h1></button>
-    <RegisteredBook
-      v-for="book in bookList"
-      :nameId="book.id"
-      :key="book.id"
-      :imagePath="book.image"
-      :title="book.title"
-      :author="book.author"
-      :house="book.publishingHouse"
-      :date="book.publishingDate"
-      :available="book.available"
-      :loaned="book.loaned"
-    ></RegisteredBook>
-    <!--
-        <div class="page-mask" :name=bookList.id>
-            <AddBookPopup :isHidden=addIsHidden></AddBookPopup>
-            <div class="add-cancel-buttons" :class="{ active: addIsMasked }">
-                <button id="add-cancel-btn" @click="cancelAdd">Cancel</button>
-                <button id="add-btn" type="submit">Add</button>
-            </div>
-        </div>-->
-    <div class="test-add" :name="bookList.id">
-      <AddBookPopup id="add-popup" :name="bookList.id"></AddBookPopup>
-    </div>
-    <div class="test-edit" :name="bookList.id">
-      <EditBookPopup
-        :id="book.id"
-        class="edit-popup"
-        v-for="book in bookList"
+  <div class="library">
+    <input class="search-bar" type="text" v-model="search">
+    <div class="myList">
+      <button id="book-button" @click="addBook()"><h1>+</h1></button>
+      <RegisteredBook
+        v-for="book in filteredBooks"
         :nameId="book.id"
         :key="book.id"
-        :image="book.image"
+        :imagePath="book.image"
         :title="book.title"
         :author="book.author"
-        :publishingHouse="book.publishingHouse"
-        :publishingDate="book.publishingDate"
+        :house="book.publishingHouse"
+        :date="book.publishingDate"
         :available="book.available"
         :loaned="book.loaned"
-      ></EditBookPopup>
-    </div>
-    <div class="test-delete" :name="bookList.id">
-      <DeleteBookPopup v-for="book in bookList" :key="book.id" class="delete-popup" :thisBookId="book.id" :id="book.id"></DeleteBookPopup>
+      ></RegisteredBook>
+      <!--
+          <div class="page-mask" :name=bookList.id>
+              <AddBookPopup :isHidden=addIsHidden></AddBookPopup>
+              <div class="add-cancel-buttons" :class="{ active: addIsMasked }">
+                  <button id="add-cancel-btn" @click="cancelAdd">Cancel</button>
+                  <button id="add-btn" type="submit">Add</button>
+              </div>
+          </div>-->
+      <div class="test-add" :name="bookList.id">
+        <AddBookPopup id="add-popup" :name="bookList.id"></AddBookPopup>
+      </div>
+      <div class="test-edit" :name="bookList.id">
+        <EditBookPopup
+          :id="book.id"
+          class="edit-popup"
+          v-for="book in bookList"
+          :nameId="book.id"
+          :key="book.id"
+          :image="book.image"
+          :title="book.title"
+          :author="book.author"
+          :publishingHouse="book.publishingHouse"
+          :publishingDate="book.publishingDate"
+          :available="book.available"
+          :loaned="book.loaned"
+        ></EditBookPopup>
+      </div>
+      <div class="test-delete" :name="bookList.id">
+        <DeleteBookPopup v-for="book in bookList" :key="book.id" class="delete-popup" :thisBookId="book.id" :id="book.id"></DeleteBookPopup>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +61,8 @@ export default {
   components: { RegisteredBook, AddBookPopup, EditBookPopup, DeleteBookPopup },
   data() {
     return {
-      bookList: String,
+      search: "",
+      bookList: [],
     };
   },
   methods: {
@@ -84,10 +88,35 @@ export default {
         component.bookList = data;
       });
   },
+  computed: {
+    filteredBooks(){
+      return this.bookList.filter(book => book.title.toLowerCase().includes(this.search) 
+      || book.author.toLowerCase().includes(this.search)
+      || book.publishingHouse.toLowerCase().includes(this.search)
+      )}
+  }
 };
 </script>
 
 <style lang="scss">
+.library {
+  margin-top: 15vh;
+
+  @media screen and (max-width: 600px) {
+    margin-top: 10vh;
+  }
+}
+.search-bar {
+  width: 30vw;
+  height: 3vh;
+  border-radius: 5px;
+  @media screen and (max-width: 900px) {
+    width: 50vw;
+  }
+  @media screen and (max-width: 600px) {
+    width: 60vw;
+  }
+}
 .myList {
   display: flex;
   flex-wrap: wrap;
