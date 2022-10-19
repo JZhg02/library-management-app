@@ -74,7 +74,7 @@ export default {
           return response.json();
         })
         .then((data) => {
-          // store token in global variable 'globalStorage'
+          // store token in global variable 'globalProperties'
           // and write it in localstorage
           component.isLoggedIn = true;
           globalProperties.$token = data.token;
