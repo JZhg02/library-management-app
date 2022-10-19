@@ -60,12 +60,14 @@ User.sync({ force: false, alter: true })
   })
 
   // Print User table
-  .then(User.findAll()
-    .then(table => {
-      console.log("User :")
-      console.log(JSON.stringify(table, null, 2))
-      console.log()
-    }))
+  .then(function () {
+    User.findAll()
+      .then(table => {
+        console.log("User :")
+        console.log(JSON.stringify(table, null, 2))
+        console.log()
+      })
+  })
 
 
 module.exports = app;
