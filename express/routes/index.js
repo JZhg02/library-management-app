@@ -124,12 +124,6 @@ router.post('/isTokenValid', async function (req, res, next) {
         });
 })
 
-// router.post("/getNewToken", async function(req, res, next) {
-//     const sessions = require("../controllers/session.controller");
-//     sessions.create(req.body.userId)
-// })
-
-
 async function maxId(tableName) {
     const maxId = await connection.query("SELECT MAX(id) FROM " + tableName)
     var res = maxId[0][0]['MAX(id)']
@@ -139,27 +133,6 @@ async function maxId(tableName) {
         return 1;
     return res;
 }
-
-
-// Not used
-// router.get('/book/:id', function (req, res, next) {
-
-//     // get a book by his id in an array of books
-//     var book = books.filter(b => {
-//         return b.id === req.params.id
-//     })
-
-//     if (book == undefined) {
-//         res.send("None")
-//         res.status("500")
-//         console.log("No book corresponding with this id")
-//     }
-//     else {
-//         res.set('Cache-Control', 'max-age=3600') // stored in cache for 1 hour 
-//         res.send(JSON.stringify(book))
-//         res.status(200)
-//     }
-// })
 
 
 module.exports = router;

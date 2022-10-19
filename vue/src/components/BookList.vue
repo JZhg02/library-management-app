@@ -72,11 +72,9 @@ export default {
       body: JSON.stringify({ token: globalProperties.$token }),
     })
       .then((response) => {
-        console.log("here1");
         return response.json();
       })
       .then((data) => {
-        console.log("here");
         console.log(data);
         component.bookList = data;
       });

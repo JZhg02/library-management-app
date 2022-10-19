@@ -68,13 +68,4 @@ User.sync({ force: false, alter: true })
     }))
 
 
-
-// Book.sync({ force: false, alter: true })
-
-// Initialize Book table
-// var books = require('./data/books.json')
-// for (const book of books) {
-//   Book.create(book)
-// }
-
 module.exports = app;
